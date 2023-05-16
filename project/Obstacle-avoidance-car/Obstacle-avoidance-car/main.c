@@ -6,6 +6,7 @@
  */ 
 
 #include "APP/app.h"
+
 int main(void)
 {   
 	
@@ -14,7 +15,7 @@ int main(void)
 
     while (1) 
     {
-		
+		pin
     }
 }
 
