@@ -1,21 +1,31 @@
 /*
  * timer.h
  *
- * Created: 4/8/2023 9:06:48 PM
+ * Created: 5/12/2023 3:36:24 PM
  *  Author: atef
  */ 
-
 
 
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include "StdTypes.h"
-#include "Utils.h"
-#include "MemMap.h"
-#include "EX_Interrupt.h"
-#include "LCD_Interface.h"
-#define  F_CPU   8000000
+#include "utils.h"
+#include "memmap.h"
+#include "std_typs.h"
+#include "lcd.h"
+#include "dio.h"
+/*================================================================================================================*/
+/********   TIMER0 [TCCR0] BITS   *******/
+#define     CS00          0              // TIMER0 Prescaller Clock Select BIT 0
+#define     CS01          1              // TIMER0 Prescaller Clock Select BIT 1
+#define     CS02          2              // TIMER0 Prescaller Clock Select BIT 2
+#define     WGM01         3              // Waveform Generation Mode (Normal,PWM-Phase Correct,CTC0,Fast PWM).
+#define     COM00         4              // Compare Match Output Mode BIT 0 (OC0) behavior
+#define     COM01         5              // Compare Match Output Mode BIT 1 (OC0) behavior
+#define     WGM00         6              // Waveform Generation Mode (Normal,PWM-Phase Correct,CTC0,Fast PWM).
+#define     FOC0          7              // Force Output Compare
+/*================================================================================================================*/
+
 /* TIFR */
 #define OCF2    7
 #define TOV2    6
@@ -25,15 +35,7 @@
 #define TOV1    2
 #define OCF0    1
 #define TOV0    0
-/* TCCR0 */
-#define FOC0    7
-#define WGM00   6
-#define COM01   5
-#define COM00   4
-#define WGM01   3
-#define CS02    2
-#define CS01    1
-#define CS00    0
+
 /* TIMSK */
 #define OCIE2   7
 #define TOIE2   6
@@ -55,6 +57,14 @@ typedef enum{
 	EXTERNALl_FALLING,
 	EXTERNAL_RISING
 }Timer0Scaler_type;
+
+typedef enum{
+	SCALER_1=1,
+	SCALER_8=8,
+	SCALER_64=64,
+	SCALER_256=256,
+	SCALER_1024=1024
+}Scaler_type;
 
 typedef enum
 {
@@ -83,6 +93,26 @@ typedef enum EN_timerError_t
 
 
 
+
+typedef enum{
+	RISING,
+	FALLING
+}ICU_Edge_type;
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+/////////////////////////////////////////////////////////////
+
+void TIMER0_Init(Timer0Mode_type mode);
+void timer_InitValue(u8 timerInitValue);
+EN_timerError_t timer_start(Timer0Scaler_type scaler);
+void timer_reset();
+void TIMER0_OV_InterruptEnable(void);
+void TIMER0_OV_InterruptDisable(void);
+void TIMER0_OV_SetCallBack(void(*LocalFptr)(void));
+u32 set_time (u16 PRE_SCALER,f64 DesiedTime);
+void timer_delay(u16 Delay);
+/////////////////////////////////////////////////////////////////
 typedef enum{
 	TIMER1_STOP=0,
 	TIMER1_SCALER_1,
@@ -93,25 +123,6 @@ typedef enum{
 	EXTERNAL0_FALLING,
 	EXTERNAL0_RISING
 }Timer1Scaler_type;
-
-
-void TIMER0_Init_all(Timer0Mode_type mode,Timer0Scaler_type scaler);
-void TIMER0_Init(Timer0Mode_type mode);
-void timer_InitValue(u8 timerInitValue);
-EN_timerError_t timer_start(Timer0Scaler_type scaler);
-void timer_reset();
-void timer_delay(u16 desiredDelay);
-void TIMER0_OC0Mode(OC0Mode_type mode);
-void TIMER0_OV_InterruptEnable(void);
-void TIMER0_OV_InterruptDisable(void);
-void TIMER0_OC_InterruptEnable(void);
-void TIMER0_OC_InterruptDisable(void);
-void TIMER0_OV_SetCallBack(void(*LocalFptr)(void));
-void set_time (u32 desiredTime);
-void timer_Ov ();
-void stats();
-/*********************************************************************************************************/
-
 
 typedef enum
 {
@@ -142,13 +153,6 @@ typedef enum
 }OC1B_Mode_type;
 
 
-typedef enum{
-	RISING,
-	FALLING
-}ICU_Edge_type;
-
-
-
 
 void Timer1_InputCaptureEdge(ICU_Edge_type edge);
 void Timer1_Init( Timer1Mode_type mode,Timer1Scaler_type scaler);
@@ -172,8 +176,5 @@ void Timer1_OVF_SetCallBack(void(*LocalFptr)(void));
 void Timer1_OCA_SetCallBack(void(*LocalFptr)(void));
 void Timer1_OCB_SetCallBack(void(*LocalFptr)(void));
 void Timer1_ICU_SetCallBack(void(*LocalFptr)(void));
-
-
-
 
 #endif /* TIMER_H_ */
