@@ -1,40 +1,30 @@
-/*
- * button.c
- *
- * Created: 4/14/2023 8:18:20 AM
- *  Author: atef
- */ 
- #include "button.h"
-en_buttonError_t BUTTON_init( DIO_Pin_type button)
-{
-	en_buttonError_t  error = BUTTON_OK;
-	
-	if (button <32)
-	{
-				DIO_initpin(button,INPULL);
-				error = BUTTON_OK;
-	}
-	else
-	{
-              error = WRONG_BUTTON_PIN;
-	}
-	
-	return error;
-}
 
-en_buttonError_t BUTTON_read(DIO_Pin_type button , DIO_PinVoltage_type *buttonState)
-{
-	en_buttonError_t  error = BUTTON_OK;
+#include "button_interface.h"
+#include "button_config.h"
+//static u8 button_press = 0 ; /** GLOBAL VARIABLE TO CHECK THE NUMBER OF PRESSED TIMES **/
+
+Button_State Is_pressed(u8 BUTTON_PIN , u8* value){
 	
-	if (button <32)
+	Button_State state = Notpressed; 
+	en_dioError_t status_pin = WRONG_VALUE;
+	
+	u8 value_check = 0 ;
+	
+	status_pin =  DIO_readpin (BUTTON_PIN, &value_check);
+	
+	if (!status_pin)
 	{
-		DIO_readpin(button,buttonState);
-		error = BUTTON_OK;
+		state = pressed ; 
+		*value = value_check ;
 	}
+	
 	else
 	{
-		error = WRONG_BUTTON_PIN;
+		state = Notpressed ; 
+		*value = value_check ;
 	}
 	
-	return error;
-}
+	return state ; 
+	
+} 
+
