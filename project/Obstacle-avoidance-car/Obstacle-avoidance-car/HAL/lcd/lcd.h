@@ -8,7 +8,7 @@
 
 #ifndef LCD_H_
 #define LCD_H_
-#include "dio.h"
+#include "../../MCAL/dio/dio.h"
 
  void LCD_Init(void);
 

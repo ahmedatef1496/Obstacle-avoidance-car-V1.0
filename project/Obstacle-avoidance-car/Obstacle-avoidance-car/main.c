@@ -5,12 +5,16 @@
  * Author : atef
  */ 
 
-
+#include "APP/app.h"
 int main(void)
-{
-    /* Replace with your application code */
+{   
+	
+	 app_init();
+	 pwm_test();
+
     while (1) 
     {
+		
     }
 }
 

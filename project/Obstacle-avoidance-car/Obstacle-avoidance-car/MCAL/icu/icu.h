@@ -9,8 +9,8 @@
 #ifndef ICU_H_
 #define ICU_H_
 
-#include "timer.h"
-#include "exi.h"
+#include "../timers/timer.h"
+#include "../Interrupt/exi.h"
 
 #define ICU_CH     PINB2 
 

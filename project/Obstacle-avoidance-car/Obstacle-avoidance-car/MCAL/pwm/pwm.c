@@ -98,3 +98,36 @@ void TIMER_pwmGenerator(u32 u32_a_desiredDutyCycle)
 		
 	
 }
+
+
+
+
+void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
+{
+	f64 f64_wavePeriodTime = (f32)1 / u32_Freq*1000000;					         /* The Periodic Time for the Generated Pulse in Seconds */
+	f64 f64_waveONTime = (f64_wavePeriodTime*u8_DutyCycle) / 100;		/* The HIGH Level Time in Seconds */
+	f64 f64_waveOFFTime = f64_wavePeriodTime - f64_waveONTime;		   /* The LOW Level Time in Seconds */
+	f64 f64_oneTickTime = 0.0;
+	f64_oneTickTime = (f64) (((f64)PWM_PRESCALER/(f64)F_CPU)*1000000);   //1u at 8,8
+	//LCD_WriteNumber(f64_wavePeriodTime) ;
+	f64 f64_max_time = (256*f64_oneTickTime); //256u
+	//LCD_WriteNumber( f64_max_time) ;
+	u32_ONTicks     =  f64_waveONTime/(f64_max_time-6);
+	LCD_WriteNumber(u32_ONTicks) ;
+	u32_OFFTicks    =  f64_waveOFFTime/(f64_max_time-6);
+	LCD_SetCursor(1,0);
+	LCD_WriteNumber(u32_OFFTicks) ;
+	DIO_writepin(PINB0,HIGH);
+}
+
+
+
+
+void pwm_init()
+{
+	DIO_initpin(PINB0,OUTPUT);
+	TIMER0_Init(TIMER0_NORMAL_MODE);
+	TIMER0_OV_InterruptEnable();
+	TIMER0_OV_SetCallBack(waveGen);
+	
+}

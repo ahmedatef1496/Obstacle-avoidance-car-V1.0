@@ -9,11 +9,9 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include "utils.h"
-#include "memmap.h"
-#include "std_typs.h"
-#include "lcd.h"
-#include "dio.h"
+#include "../dio/dio.h"
+//#include "../../HAL/lcd.h"
+
 /*================================================================================================================*/
 /********   TIMER0 [TCCR0] BITS   *******/
 #define     CS00          0              // TIMER0 Prescaller Clock Select BIT 0

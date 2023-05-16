@@ -8,14 +8,13 @@
 
 #ifndef PWM_H_
 #define PWM_H_
-#include "utils.h"
-#include "memmap.h"
-#include "std_typs.h"
-#include "timer.h"
-#include "pwm_lcfg.h"
-#include "lcd.h"
-#include "dio.h"
 
+#include "../timers/timer.h"
+#include "../Interrupt/exi.h"
+#include "pwm_lcfg.h"
+#include "../../HAL/lcd/lcd.h"
+
+#define  PWM_PRESCALER    8
 typedef struct
 {
 	DIO_Pin_type ChannelID;
@@ -30,5 +29,7 @@ void waveGen();
 void waveGen2();
 void set_duty(u8 u8_DutyCycle,u32 u32_Freq,u16 u16_PRE_SCALER);
 void set_duty_hf(u8 u8_DutyCycle,u32 u32_Freq,u16 u16_PRE_SCALER);
+void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq);
+void pwm_init();
 
 #endif /* PWM_H_ */

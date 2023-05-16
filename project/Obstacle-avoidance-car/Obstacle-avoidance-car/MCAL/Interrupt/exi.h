@@ -8,10 +8,7 @@
 
 #ifndef EXI_H_
 #define EXI_H_
-#include "utils.h"
-#include "memmap.h"
-#include "std_typs.h"
-
+#include "../dio/dio.h"
 #define  GLOBALE_ENABLE  sei
 
 typedef enum{
