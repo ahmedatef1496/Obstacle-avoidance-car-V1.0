@@ -13,9 +13,19 @@ static void (*Timer1_OCA_Fptr) (void)=NULLPTR;
 static void (*Timer1_OCB_Fptr) (void)=NULLPTR;
 static void (*Timer1_ICU_Fptr) (void)=NULLPTR;
 /******************************************************************************************/
+/*********************************************************************************************************
+                                       global variables
+*********************************************************************************************************/
+ // used in TIME_0_DELAY_MS
+static double g_ovfNum  ; 
+static double g_time ;
 
+ // used in TIMER_2_INT
+u8 car_mode = 0;
+s32 mode_ovf = 0;
+static s32 ovf = 0;
 u32 gu32_T1_OVF_TICKS;
-
+u8 car_flag =0  ;
 
 void TIMER0_Init(Timer0Mode_type mode)
 {
@@ -55,7 +65,7 @@ void TIMER0_Init(Timer0Mode_type mode)
 		 TCCR0|=scaler;
 		 return TIMER_OK;
 		 default:
-		 return TIMER_Error;
+		 return INVALID_PRESCALER;
 	 }
  } 
  
@@ -105,14 +115,6 @@ void TIMER0_Init(Timer0Mode_type mode)
 	 CLR_BIT(TIMSK,OCIE0);
  }
 
-
-
-
-
-
-
-
-
 /*
 u32 set_time (u16 PRE_SCALER,u32 DesiedTime)
 {
@@ -140,17 +142,6 @@ u32 set_time (u16 PRE_SCALER,u32 DesiedTime)
 
 
 */
-
-
-
-
-
-
-
-
-
-
-
 
 u32 set_time (u16 PRE_SCALER,f64 DesiedTime)
 { 
@@ -392,4 +383,227 @@ ISR(TIMER1_ICU_vect)
 	{
 		Timer1_ICU_Fptr();
 	}
+}
+
+
+
+
+
+
+/*****************************************************************************************/
+//										 TIMER2
+/*****************************************************************************************/
+
+
+
+EN_timerError_t TIMER_2_init(Timer2Mode_type a_mode){
+	EN_timerError_t errorStatus = TIMER_OK;
+	
+	switch(a_mode){
+		
+		case NORMAL_MODE :
+		CLR_BIT(TCCR2,WGM20);
+		CLR_BIT(TCCR2,WGM21);
+		break;
+		
+		case PWM_PHASE_CORRECT :
+		SET_BIT(TCCR2,WGM20);
+		CLR_BIT(TCCR2,WGM21);
+		break;
+		
+		case CTC :
+		CLR_BIT(TCCR2,WGM20);
+		SET_BIT(TCCR2,WGM21);
+		break;
+		
+		
+		case FAST_PWM :
+		SET_BIT(TCCR2,WGM20);
+		SET_BIT(TCCR2,WGM21);
+		break;
+		
+		default:
+		errorStatus = INVALID_MODE ;
+		break;
+	}
+	
+	
+	return errorStatus;
+	
+	
+}
+
+
+
+void TIMER_2_stop(void){
+	
+	CLR_BIT(TCCR2,CS20);
+	CLR_BIT(TCCR2,CS21);
+	CLR_BIT(TCCR2,CS22);
+	
+}
+
+
+
+ EN_timerError_t TIMER_2_setIntialValue(u8 a_value){
+	 EN_timerError_t errorStatus = TIMER_OK;
+
+	if(a_value < TIMR2_MAX_VALUE && a_value >= 0){
+		
+		TCNT2 = a_value ;
+		}
+		else
+		{
+		errorStatus = INVALID_VALUE;
+	}
+	return errorStatus ;
+}
+
+
+
+ EN_timerError_t TIMER_2_start(Timer2Scaler_type a_prescaler){
+	 EN_timerError_t errorStatus = TIMER_OK;
+	
+	switch(a_prescaler){
+		
+		case PRECALER_1 :
+		SET_BIT(TCCR2,CS20);
+		CLR_BIT(TCCR2,CS21);
+		CLR_BIT(TCCR2,CS22);
+		break;
+		
+		case PRECALER_8 :
+		SET_BIT(TCCR2,CS21);
+		CLR_BIT(TCCR2,CS20);
+		CLR_BIT(TCCR2,CS22);
+		break;
+		
+		case PRECALER_32 :
+		SET_BIT(TCCR2,CS20);
+		SET_BIT(TCCR2,CS21);
+		CLR_BIT(TCCR2,CS22);
+		break;
+		
+		case PRECALER_64 :
+		SET_BIT(TCCR2,CS22);
+		CLR_BIT(TCCR2,CS21);
+		CLR_BIT(TCCR2,CS20);
+		break;
+		
+		case PRECALER_128 :
+		SET_BIT(TCCR2,CS20);
+		CLR_BIT(TCCR2,CS21);
+		SET_BIT(TCCR2,CS22);
+		break;
+		
+		case PRECALER_256 :
+		SET_BIT(TCCR2,CS22);
+		CLR_BIT(TCCR2,CS20);
+		SET_BIT(TCCR2,CS21);
+		break;
+		
+		case PRECALER_1024 :
+		SET_BIT(TCCR2,CS20);
+		SET_BIT(TCCR2,CS21);
+		SET_BIT(TCCR2,CS22);
+		break;
+		
+		
+		default:
+		errorStatus= INVALID_PRESCALER;
+		break;
+	}
+	
+	return errorStatus ;
+}
+
+
+
+ EN_timerError_t TIMER_2_OvfNum(double overflow){
+	 EN_timerError_t errorStatus = TIMER_OK;
+	double num_ovf = 0;
+	if (overflow > 0)
+	{
+		
+		while(num_ovf<overflow){
+			
+			while(READ_BIT(TIFR,TOV2)==0);
+			SET_BIT(TIFR,TOV2);
+			num_ovf++;
+		}
+		num_ovf = 0;
+	}else if (overflow <= 0)
+	{
+		overflow = 1 ;
+		while(num_ovf<overflow){
+			
+			while(READ_BIT(TIFR,TOV2)==0);
+			SET_BIT(TIFR,TOV2);
+			num_ovf++;
+		}
+		num_ovf = 0;
+	}
+	
+	else{
+		errorStatus = INVALID_OVF;
+	}
+	
+	return errorStatus;
+}
+
+
+
+void TIMER_2_DELAY_MS(double time_ms){
+	double ovfNum2  ;
+	double t2 ;
+	t2 = time_ms/1000 ;
+	ovfNum2 = ceil (t2 / 0.000256) ;
+	TIMER_2_init(NORMAL_MODE);
+	TIMER_2_setIntialValue(0);
+	TIMER_2_start(PRECALER_1);
+	TIMER_2_OvfNum(ovfNum2);
+	
+}
+
+
+
+
+
+
+
+void TIMER_2_INT(){
+	sei();
+	SET_BIT(TIMSK,TOIE2);
+	TIMER_2_init(NORMAL_MODE);
+	TIMER_2_setIntialValue(0);
+	TIMER_2_start(PRECALER_1);
+	
+	
+	
+}
+
+
+
+
+ISR(TIMER2_OVF){
+	if(car_flag == 1){
+		
+		if (ovf < mode_ovf ){
+			ovf++;
+		}
+		else if ( ovf == mode_ovf && mode_ovf!=0){
+			ovf =0 ;
+			
+			if (car_mode < 8)
+			{
+				car_mode++;
+				
+				}else{
+				car_mode = 1 ;
+			}
+			
+		}
+		
+	}
+	
 }

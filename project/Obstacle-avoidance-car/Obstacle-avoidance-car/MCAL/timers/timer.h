@@ -9,8 +9,18 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include "../dio/dio.h"
-//#include "../../HAL/lcd.h"
+#include "utils.h"
+#include "memmap.h"
+#include "std_typs.h"
+#include "lcd.h"
+#include "dio.h"
+
+#define TIMR0_MAX_VALUE		256
+#define TIMR2_MAX_VALUE		256
+extern   u8 car_mode ;
+extern   s32 mode_ovf ;
+
+
 
 /*================================================================================================================*/
 /********   TIMER0 [TCCR0] BITS   *******/
@@ -44,6 +54,13 @@
 #define OCIE0   1
 #define TOIE0   0
 
+typedef enum {
+	INVALID_PRESCALER,
+	INVALID_MODE,
+	INVALID_OVF,
+	INVALID_VALUE,
+	TIMER_OK
+} EN_timerError_t;
 
 typedef enum{
 	TIMER0_STOP=0,
@@ -82,12 +99,6 @@ typedef enum
 	OC0_INVERTING
 
 }OC0Mode_type;
-
-typedef enum EN_timerError_t
-{
-	TIMER_OK,
-	TIMER_Error
-}EN_timerError_t;
 
 
 
@@ -175,4 +186,35 @@ void Timer1_OCA_SetCallBack(void(*LocalFptr)(void));
 void Timer1_OCB_SetCallBack(void(*LocalFptr)(void));
 void Timer1_ICU_SetCallBack(void(*LocalFptr)(void));
 
+
+
+
+typedef enum {
+	NORMAL_MODE,
+	FAST_PWM,
+	CTC,
+	PWM_PHASE_CORRECT	
+}Timer2Mode_type; 
+
+typedef enum{
+	PRECALER_1,
+	PRECALER_8,
+	PRECALER_64,
+	PRECALER_32, 
+	PRECALER_128, 
+	PRECALER_256,
+	PRECALER_1024,
+}Timer2Scaler_type;
+
+
+
+/********************************** TIMER_2_ ******************************************/
+ EN_timerError_t TIMER_2_init(Timer2Mode_type a_mode);
+ EN_timerError_t TIMER_2_start(Timer2Scaler_type a_prescaler);
+void TIMER_2_stop(void);
+ EN_timerError_t TIMER_2_setIntialValue(u8 a_value);
+ EN_timerError_t TIMER_2_OvfNum(double overflow);
+void TIMER_2_DELAY_MS(double _delay);
+
+void TIMER_2_INT();
 #endif /* TIMER_H_ */
