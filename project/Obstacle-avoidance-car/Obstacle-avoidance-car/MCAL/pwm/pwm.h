@@ -25,11 +25,10 @@ typedef struct
 }st_Pwm_ChannelData_t;
 
 
-void waveGen();
-void waveGen2();
-void set_duty(u8 u8_DutyCycle,u32 u32_Freq,u16 u16_PRE_SCALER);
-void set_duty_hf(u8 u8_DutyCycle,u32 u32_Freq,u16 u16_PRE_SCALER);
-void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq);
-void pwm_init();
 
+void pwm_init();
+void waveGen();
+void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq);
+void waveGen_hf();
+void PWM_set_duty_hf(u8 u8_DutyCycle,u32 u32_Freq);
 #endif /* PWM_H_ */
