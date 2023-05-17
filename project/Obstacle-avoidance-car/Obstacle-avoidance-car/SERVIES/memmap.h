@@ -209,6 +209,20 @@ void vector(void)
 
 #define OSCCAL       (*(volatile unsigned char*)0x51)
 
+/*----------------------------------------------------------------*/
+/**********************************************************/
+/**            Timer-2 Registers                          */
+/**********************************************************/
+
+// Timer/Counter Control Register
+#define TCCR2 *((volatile unsigned char* )0x45)  // 8-bit register
+
+// Timer/Counter Data Register - 8 bit
+#define TCNT2 *((volatile unsigned char* )0x44)  // 8-bit register
+
+/* TIMER-0 OUTPUT COMPARE REGISTER */
+#define OCR2 *((volatile unsigned char* )0x43)  // 8-bit register
+
 /* TCCR2 */
 #define FOC2    7
 #define WGM20   6

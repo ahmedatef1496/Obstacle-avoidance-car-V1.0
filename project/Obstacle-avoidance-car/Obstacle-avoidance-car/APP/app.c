@@ -14,6 +14,7 @@ void app_init()
 	Car_Motors_init();
 	LCD_Init();
 	KEYPAD_init();
+	DIO_initpin(PIND6,INPULL);
 
 }
 
@@ -21,7 +22,7 @@ void app_init()
 void pwm_test()
 {       
 	
-	PWM_set_duty(30,100);
+	PWM_set_duty(90,100);
 	timer_start(TIMER0_SCALER_8);
 	Car_Moving_FWD();
 	

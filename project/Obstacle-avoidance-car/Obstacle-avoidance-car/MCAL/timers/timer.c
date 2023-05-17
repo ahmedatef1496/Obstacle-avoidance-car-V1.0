@@ -585,7 +585,7 @@ void TIMER_2_INT(){
 
 
 
-ISR(TIMER2_OVF){
+ISR(TIMER2_OV_vect){
 	if(car_flag == 1){
 		
 		if (ovf < mode_ovf ){

@@ -14,6 +14,7 @@
 #include "../HAL/button/button_interface.h"
 #include "../HAL/lcd/lcd.h"
 #include "../HAL/motor/motor.h"
+#include "../MCAL/dio/dio.h"
 
 
 void app_init();

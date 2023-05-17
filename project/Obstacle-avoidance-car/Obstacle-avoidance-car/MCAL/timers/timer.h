@@ -9,11 +9,9 @@
 #ifndef TIMER_H_
 #define TIMER_H_
 
-#include "utils.h"
-#include "memmap.h"
-#include "std_typs.h"
-#include "lcd.h"
-#include "dio.h"
+#include "../dio/dio.h"
+#include <math.h>
+
 
 #define TIMR0_MAX_VALUE		256
 #define TIMR2_MAX_VALUE		256
