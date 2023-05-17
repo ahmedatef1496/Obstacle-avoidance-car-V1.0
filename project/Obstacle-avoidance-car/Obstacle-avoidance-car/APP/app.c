@@ -18,6 +18,7 @@ void app_init()
 
 }
 
+u8 X ;
 
 void pwm_test()
 {       
@@ -26,4 +27,10 @@ void pwm_test()
 	timer_start(TIMER0_SCALER_8);
 	Car_Moving_FWD();
 	
+}
+void app_start()
+{
+	KEYPAD_getpressedkey(&X);
+	LCD_Clear();
+	LCD_WriteNumber(X);
 }

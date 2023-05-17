@@ -19,5 +19,7 @@
 
 void app_init();
 void pwm_test();
+void app_start();
+
 
 #endif /* APP_H_ */
