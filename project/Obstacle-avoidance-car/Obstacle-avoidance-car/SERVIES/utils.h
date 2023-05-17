@@ -10,7 +10,7 @@
 #define UTILS_H_
 
 #define F_CPU    8000000
-#include <util/delay.h>
+
 
 #define  SET_BIT(reg,bit)     (reg=reg|(1<<bit))
 #define  CLR_BIT(reg,bit)     (reg=reg&~(1<<bit))

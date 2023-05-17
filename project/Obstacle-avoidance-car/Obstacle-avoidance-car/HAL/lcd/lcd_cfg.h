@@ -26,15 +26,15 @@
 
 
 
-#define  RS   PINA1
-#define  RW   PINA2
-#define  EN   PINA3
-#define  D7   PINA7
-#define  D6   PINA6
-#define  D5   PINA5
-#define  D4   PINA4
+#define  RS   PINC1
+#define  RW   PINC2
+#define  EN   PINC3
+#define  D7   PINC7
+#define  D6   PINC6
+#define  D5   PINC5
+#define  D4   PINC4
 
-#define LCD_PORT  PA
+#define LCD_PORT  PC
 
 
 

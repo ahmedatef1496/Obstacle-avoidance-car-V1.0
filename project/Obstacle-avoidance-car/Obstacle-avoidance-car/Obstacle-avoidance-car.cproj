@@ -126,6 +126,24 @@
     <Compile Include="APP\app.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\button\button.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\button\button_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\button\button_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\keypad\keypad.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\keypad\keypad_config.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\keypad\keypad_interface.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="HAL\lcd\lcd.c">
       <SubType>compile</SubType>
     </Compile>
@@ -139,6 +157,12 @@
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="HAL\motor\motor.h">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\ultrasonic\ultrasonic.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\ultrasonic\ultrasonic.h">
       <SubType>compile</SubType>
     </Compile>
     <Compile Include="main.c">
@@ -203,6 +227,7 @@
     <Folder Include="APP\" />
     <Folder Include="HAL\" />
     <Folder Include="HAL\button\" />
+    <Folder Include="HAL\keypad\" />
     <Folder Include="HAL\lcd\" />
     <Folder Include="HAL\motor\" />
     <Folder Include="HAL\ultrasonic\" />

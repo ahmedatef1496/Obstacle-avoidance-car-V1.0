@@ -10,6 +10,11 @@
 #define APP_H_
 #include "../HAL/lcd/lcd.h"
 #include "../MCAL/pwm/pwm.h"
+#include "../HAL/keypad/keypad_interface.h"
+#include "../HAL/button/button_interface.h"
+#include "../HAL/lcd/lcd.h"
+#include "../HAL/motor/motor.h"
+
 
 void app_init();
 void pwm_test();

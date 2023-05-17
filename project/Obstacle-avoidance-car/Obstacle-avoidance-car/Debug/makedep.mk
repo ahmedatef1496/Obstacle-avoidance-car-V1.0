@@ -4,9 +4,15 @@
 
 APP\app.c
 
+HAL\button\button.c
+
+HAL\keypad\keypad.c
+
 HAL\lcd\lcd.c
 
 HAL\motor\motor.c
+
+HAL\ultrasonic\ultrasonic.c
 
 main.c
 

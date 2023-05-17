@@ -36,6 +36,7 @@ SUBDIRS :=  \
 ../APP/ \
 ../HAL/ \
 ../HAL/button/ \
+../HAL/keypad/ \
 ../HAL/lcd/ \
 ../HAL/motor/ \
 ../HAL/ultrasonic/ \
@@ -51,8 +52,11 @@ SUBDIRS :=  \
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS +=  \
 ../APP/app.c \
+../HAL/button/button.c \
+../HAL/keypad/keypad.c \
 ../HAL/lcd/lcd.c \
 ../HAL/motor/motor.c \
+../HAL/ultrasonic/ultrasonic.c \
 ../main.c \
 ../MCAL/dio/dio.c \
 ../MCAL/dio/dio_cfg.c \
@@ -71,8 +75,11 @@ ASM_SRCS +=
 
 OBJS +=  \
 APP/app.o \
+HAL/button/button.o \
+HAL/keypad/keypad.o \
 HAL/lcd/lcd.o \
 HAL/motor/motor.o \
+HAL/ultrasonic/ultrasonic.o \
 main.o \
 MCAL/dio/dio.o \
 MCAL/dio/dio_cfg.o \
@@ -84,8 +91,11 @@ MCAL/timers/timer.o
 
 OBJS_AS_ARGS +=  \
 APP/app.o \
+HAL/button/button.o \
+HAL/keypad/keypad.o \
 HAL/lcd/lcd.o \
 HAL/motor/motor.o \
+HAL/ultrasonic/ultrasonic.o \
 main.o \
 MCAL/dio/dio.o \
 MCAL/dio/dio_cfg.o \
@@ -97,8 +107,11 @@ MCAL/timers/timer.o
 
 C_DEPS +=  \
 APP/app.d \
+HAL/button/button.d \
+HAL/keypad/keypad.d \
 HAL/lcd/lcd.d \
 HAL/motor/motor.d \
+HAL/ultrasonic/ultrasonic.d \
 main.d \
 MCAL/dio/dio.d \
 MCAL/dio/dio_cfg.d \
@@ -110,8 +123,11 @@ MCAL/timers/timer.d
 
 C_DEPS_AS_ARGS +=  \
 APP/app.d \
+HAL/button/button.d \
+HAL/keypad/keypad.d \
 HAL/lcd/lcd.d \
 HAL/motor/motor.d \
+HAL/ultrasonic/ultrasonic.d \
 main.d \
 MCAL/dio/dio.d \
 MCAL/dio/dio_cfg.d \
@@ -142,6 +158,20 @@ APP/app.o: ../APP/app.c
 	@echo Finished building: $<
 	
 
+HAL/button/button.o: ../HAL/button/button.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+HAL/keypad/keypad.o: ../HAL/keypad/keypad.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
 HAL/lcd/lcd.o: ../HAL/lcd/lcd.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
@@ -150,6 +180,13 @@ HAL/lcd/lcd.o: ../HAL/lcd/lcd.c
 	
 
 HAL/motor/motor.o: ../HAL/motor/motor.c
+	@echo Building file: $<
+	@echo Invoking: AVR/GNU C Compiler : 5.4.0
+	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 
+	@echo Finished building: $<
+	
+
+HAL/ultrasonic/ultrasonic.o: ../HAL/ultrasonic/ultrasonic.c
 	@echo Building file: $<
 	@echo Invoking: AVR/GNU C Compiler : 5.4.0
 	$(QUOTE)C:\Program Files (x86)\Atmel\Studio\7.0\toolchain\avr8\avr8-gnu-toolchain\bin\avr-gcc.exe$(QUOTE)  -x c -funsigned-char -funsigned-bitfields -DDEBUG  -I"C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\include"  -Og -ffunction-sections -fdata-sections -fpack-struct -fshort-enums -g2 -Wall -mmcu=atmega32 -B "C:\Program Files (x86)\Atmel\Studio\7.0\Packs\atmel\ATmega_DFP\1.7.374\gcc\dev\atmega32" -c -std=gnu99 -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"   -o "$@" "$<" 

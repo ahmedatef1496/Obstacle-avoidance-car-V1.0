@@ -11,13 +11,18 @@ void app_init()
 	LCD_Init();
 	GLOBALE_ENABLE();
 	pwm_init();
+	Car_Motors_init();
+	LCD_Init();
+	KEYPAD_init();
+
 }
 
 
 void pwm_test()
 {       
 	
-	PWM_set_duty(20,100);
+	PWM_set_duty(30,100);
 	timer_start(TIMER0_SCALER_8);
+	Car_Moving_FWD();
 	
 }

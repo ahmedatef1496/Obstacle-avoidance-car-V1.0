@@ -9,7 +9,8 @@
 #ifndef ULTRASONIC_H_
 #define ULTRASONIC_H_
 
-
+#include "../../MCAL/dio/dio.h"
+#include "../../MCAL/timers/timer.h"
 
 
 

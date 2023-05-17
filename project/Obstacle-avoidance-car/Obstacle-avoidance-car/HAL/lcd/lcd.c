@@ -216,12 +216,12 @@ void LCD_CustomChar(u8 loc,u8*pattern)
 }
    void LCD_PinsInit ()
    {
-	   DIO_initpin(PINA0,OUTPUT);
-	   DIO_initpin(PINA1,OUTPUT);
-	   DIO_initpin(PINA2,OUTPUT);
-	   DIO_initpin(PINA3,OUTPUT);
-	   DIO_initpin(PINA4,OUTPUT);
-	   DIO_initpin(PINA5,OUTPUT);
-	   DIO_initpin(PINA6,OUTPUT);
-	   DIO_initpin(PINA7,OUTPUT);
+	   DIO_initpin(RS,OUTPUT);
+	   DIO_initpin(EN,OUTPUT);
+	   DIO_initpin(RW,OUTPUT);
+	   DIO_initpin(D4,OUTPUT);
+	   DIO_initpin(D5,OUTPUT);
+	   DIO_initpin(D6,OUTPUT);
+	   DIO_initpin(D7,OUTPUT);
+
    }
