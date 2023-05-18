@@ -25,9 +25,9 @@ APP/app.d APP/app.o: ../APP/app.c ../APP/app.h ../APP/../HAL/lcd/lcd.h \
  ../APP/../HAL/button/../../SERVIES/std_typs.h \
  ../APP/../HAL/motor/motor.h ../APP/../HAL/motor/../../MCAL/dio/dio.h \
  ../APP/../MCAL/dio/dio.h ../APP/../HAL/ultrasonic/us.h \
- ../APP/../HAL/ultrasonic/../../mcal/dio/dio.h \
- ../APP/../HAL/ultrasonic/../../mcal/interrupt/exi.h \
- ../APP/../HAL/ultrasonic/../../mcal/TIMERS/timer.h
+ ../APP/../HAL/ultrasonic/../../mcal/icu/icu.h \
+ ../APP/../HAL/ultrasonic/../../mcal/icu/../timers/timer.h \
+ ../APP/../HAL/ultrasonic/../../mcal/icu/../Interrupt/exi.h
 
 ../APP/app.h:
 
@@ -93,8 +93,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 
 ../APP/../HAL/ultrasonic/us.h:
 
-../APP/../HAL/ultrasonic/../../mcal/dio/dio.h:
+../APP/../HAL/ultrasonic/../../mcal/icu/icu.h:
 
-../APP/../HAL/ultrasonic/../../mcal/interrupt/exi.h:
+../APP/../HAL/ultrasonic/../../mcal/icu/../timers/timer.h:
 
-../APP/../HAL/ultrasonic/../../mcal/TIMERS/timer.h:
+../APP/../HAL/ultrasonic/../../mcal/icu/../Interrupt/exi.h:

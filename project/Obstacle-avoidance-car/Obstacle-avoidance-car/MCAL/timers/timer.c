@@ -12,6 +12,7 @@ static void (*Timer1_OVF_Fptr) (void)=NULLPTR;
 static void (*Timer1_OCA_Fptr) (void)=NULLPTR;
 static void (*Timer1_OCB_Fptr) (void)=NULLPTR;
 static void (*Timer1_ICU_Fptr) (void)=NULLPTR;
+static void (*Timer2_OVF_Fptr) (void)=NULLPTR;
 /******************************************************************************************/
 /*********************************************************************************************************
                                        global variables
@@ -386,7 +387,16 @@ ISR(TIMER1_ICU_vect)
 }
 
 
-
+void timer1_ReadCounts(u16 *pu16_timer1Counts)
+{
+	*pu16_timer1Counts =TCNT1 ;
+	
+}
+void timer1_setTimerValue(u8 timerValue)
+{
+	TCNT1 = timerValue ;
+	
+}
 
 
 
@@ -396,43 +406,65 @@ ISR(TIMER1_ICU_vect)
 
 
 
-EN_timerError_t TIMER_2_init(Timer2Mode_type a_mode){
-	EN_timerError_t errorStatus = TIMER_OK;
-	
-	switch(a_mode){
-		
-		case NORMAL_MODE :
+// EN_timerError_t TIMER_2_init(Timer2Mode_type a_mode){
+// 	EN_timerError_t errorStatus = TIMER_OK;
+// 	
+// 	switch(a_mode){
+// 		
+// 		case NORMAL_MODE :
+// 		CLR_BIT(TCCR2,WGM20);
+// 		CLR_BIT(TCCR2,WGM21);
+// 		break;
+// 		
+// 		case PWM_PHASE_CORRECT :
+// 		SET_BIT(TCCR2,WGM20);
+// 		CLR_BIT(TCCR2,WGM21);
+// 		break;
+// 		
+// 		case CTC :
+// 		CLR_BIT(TCCR2,WGM20);
+// 		SET_BIT(TCCR2,WGM21);
+// 		break;
+// 		
+// 		
+// 		case FAST_PWM :
+// 		SET_BIT(TCCR2,WGM20);
+// 		SET_BIT(TCCR2,WGM21);
+// 		break;
+// 		
+// 		default:
+// 		errorStatus = INVALID_MODE ;
+// 		break;
+// 	}
+// 	
+// 	
+// 	return errorStatus;
+// 	
+// 	
+// }
+
+void TIMER2_Init(Timer2Mode_type mode)
+{
+	switch (mode)
+	{
+		case TIMER2_NORMAL_MODE:
 		CLR_BIT(TCCR2,WGM20);
 		CLR_BIT(TCCR2,WGM21);
 		break;
-		
-		case PWM_PHASE_CORRECT :
+		case TIMER2_PHASECORRECT_MODE:
 		SET_BIT(TCCR2,WGM20);
 		CLR_BIT(TCCR2,WGM21);
 		break;
-		
-		case CTC :
+		case TIMER2_CTC_MODE:
 		CLR_BIT(TCCR2,WGM20);
 		SET_BIT(TCCR2,WGM21);
 		break;
-		
-		
-		case FAST_PWM :
+		case TIMER2_FASTPWM_MODE:
 		SET_BIT(TCCR2,WGM20);
 		SET_BIT(TCCR2,WGM21);
-		break;
-		
-		default:
-		errorStatus = INVALID_MODE ;
 		break;
 	}
-	
-	
-	return errorStatus;
-	
-	
 }
-
 
 
 void TIMER_2_stop(void){
@@ -460,64 +492,80 @@ void TIMER_2_stop(void){
 }
 
 
+//  EN_timerError_t TIMER_2_start(Timer2Scaler_type a_prescaler){
+// 	 EN_timerError_t errorStatus = TIMER_OK;
+// 	
+// 	switch(a_prescaler){
+// 		
+// 		case PRECALER_1 :
+// 		SET_BIT(TCCR2,CS20);
+// 		CLR_BIT(TCCR2,CS21);
+// 		CLR_BIT(TCCR2,CS22);
+// 		break;
+// 		
+// 		case PRECALER_8 :
+// 		SET_BIT(TCCR2,CS21);
+// 		CLR_BIT(TCCR2,CS20);
+// 		CLR_BIT(TCCR2,CS22);
+// 		break;
+// 		
+// 		case PRECALER_32 :
+// 		SET_BIT(TCCR2,CS20);
+// 		SET_BIT(TCCR2,CS21);
+// 		CLR_BIT(TCCR2,CS22);
+// 		break;
+// 		
+// 		case PRECALER_64 :
+// 		SET_BIT(TCCR2,CS22);
+// 		CLR_BIT(TCCR2,CS21);
+// 		CLR_BIT(TCCR2,CS20);
+// 		break;
+// 		
+// 		case PRECALER_128 :
+// 		SET_BIT(TCCR2,CS20);
+// 		CLR_BIT(TCCR2,CS21);
+// 		SET_BIT(TCCR2,CS22);
+// 		break;
+// 		
+// 		case PRECALER_256 :
+// 		SET_BIT(TCCR2,CS22);
+// 		CLR_BIT(TCCR2,CS20);
+// 		SET_BIT(TCCR2,CS21);
+// 		break;
+// 		
+// 		case PRECALER_1024 :
+// 		SET_BIT(TCCR2,CS20);
+// 		SET_BIT(TCCR2,CS21);
+// 		SET_BIT(TCCR2,CS22);
+// 		break;
+// 		
+// 		
+// 		default:
+// 		errorStatus= INVALID_PRESCALER;
+// 		break;
+// 	}
+// 	
+// 	return errorStatus ;
+// }
 
- EN_timerError_t TIMER_2_start(Timer2Scaler_type a_prescaler){
-	 EN_timerError_t errorStatus = TIMER_OK;
-	
-	switch(a_prescaler){
-		
-		case PRECALER_1 :
-		SET_BIT(TCCR2,CS20);
-		CLR_BIT(TCCR2,CS21);
-		CLR_BIT(TCCR2,CS22);
-		break;
-		
-		case PRECALER_8 :
-		SET_BIT(TCCR2,CS21);
-		CLR_BIT(TCCR2,CS20);
-		CLR_BIT(TCCR2,CS22);
-		break;
-		
-		case PRECALER_32 :
-		SET_BIT(TCCR2,CS20);
-		SET_BIT(TCCR2,CS21);
-		CLR_BIT(TCCR2,CS22);
-		break;
-		
-		case PRECALER_64 :
-		SET_BIT(TCCR2,CS22);
-		CLR_BIT(TCCR2,CS21);
-		CLR_BIT(TCCR2,CS20);
-		break;
-		
-		case PRECALER_128 :
-		SET_BIT(TCCR2,CS20);
-		CLR_BIT(TCCR2,CS21);
-		SET_BIT(TCCR2,CS22);
-		break;
-		
-		case PRECALER_256 :
-		SET_BIT(TCCR2,CS22);
-		CLR_BIT(TCCR2,CS20);
-		SET_BIT(TCCR2,CS21);
-		break;
-		
-		case PRECALER_1024 :
-		SET_BIT(TCCR2,CS20);
-		SET_BIT(TCCR2,CS21);
-		SET_BIT(TCCR2,CS22);
-		break;
-		
-		
+EN_timerError_t timer2_start(Timer2Scaler_type scaler)
+{
+	switch (scaler) {
+		case TIMER2_STOP:
+		case TIMER2_SCALER_1:
+		case TIMER2_SCALER_8:
+		case TIMER2_SCALER_32:
+		case TIMER2_SCALER_64:
+		case TIMER2_SCALER_128:
+		case TIMER2_SCALER_256:
+		case TIMER2_SCALER_1024:
+		TCCR2&=0XF8;//0b11111000
+		TCCR2|=scaler;
+		return TIMER_OK;
 		default:
-		errorStatus= INVALID_PRESCALER;
-		break;
+		return INVALID_PRESCALER;
 	}
-	
-	return errorStatus ;
 }
-
-
 
  EN_timerError_t TIMER_2_OvfNum(double overflow){
 	 EN_timerError_t errorStatus = TIMER_OK;
@@ -553,17 +601,17 @@ void TIMER_2_stop(void){
 
 
 
-void TIMER_2_DELAY_MS(double time_ms){
-	double ovfNum2  ;
-	double t2 ;
-	t2 = time_ms/1000 ;
-	ovfNum2 = ceil (t2 / 0.000256) ;
-	TIMER_2_init(NORMAL_MODE);
-	TIMER_2_setIntialValue(0);
-	TIMER_2_start(PRECALER_1);
-	TIMER_2_OvfNum(ovfNum2);
-	
-}
+// void TIMER_2_DELAY_MS(double time_ms){
+// 	double ovfNum2  ;
+// 	double t2 ;
+// 	t2 = time_ms/1000 ;
+// 	ovfNum2 = ceil (t2 / 0.000256) ;
+// 	TIMER_2_init(NORMAL_MODE);
+// 	TIMER_2_setIntialValue(0);
+// 	TIMER_2_start(PRECALER_1);
+// 	TIMER_2_OvfNum(ovfNum2);
+// 	
+// }
 
 
 
@@ -572,42 +620,58 @@ void TIMER_2_DELAY_MS(double time_ms){
 
 
 void TIMER_2_INT(){
-	sei();
-	SET_BIT(TIMSK,TOIE2);
-	TIMER_2_init(NORMAL_MODE);
+	TIMER2_OV_InterruptEnable();
+	TIMER2_Init(TIMER2_NORMAL_MODE);
 	TIMER_2_setIntialValue(0);
-	TIMER_2_start(PRECALER_1);
-	
-	
-	
+	timer2_start(TIMER2_SCALER_1);	
 }
 
+void TIMER2_OV_InterruptEnable(void)
+{
+	SET_BIT(TIMSK,TOIE2);
+}
+void TIMER2_OV_InterruptDisable(void)
+{
+	CLR_BIT(TIMSK,TOIE2);
+}
+
+////////////////////////////////////////////Timer 2 Call Back functions///////////////////////////////////////
+void TIMER2_OV_SetCallBack(void(*LocalFptr)(void))
+{
+	Timer2_OVF_Fptr=LocalFptr;
+}
 
 
 
 ISR(TIMER2_OV_vect)
 {
-	if(g_speed_flag == 1)
+	if(Timer2_OVF_Fptr!=NULLPTR)
 	{
-		
-		if (ovf < mode_ovf ){
-			ovf++;
-		}
-		else if ( ovf == mode_ovf && mode_ovf!=0)
-		{
-			ovf =0 ;
-			if (car_mode ==0)
-			{
-				car_mode=1;	
-			}
-			else
-			{
-				car_mode == 0;
-			}
-			
-		}
-		
-		
+		Timer2_OVF_Fptr();
 	}
 }
+// ISR(TIMER2_OV_vect)
+// {
+// 	if(g_speed_flag == 1)
+// 	{
+// 		
+// 		if (ovf < mode_ovf ){
+// 			ovf++;
+// 		}
+// 		else if ( ovf == mode_ovf && mode_ovf!=0)
+// 		{
+// 			ovf =0 ;
+// 			if (car_mode ==0)
+// 			{
+// 				car_mode=1;	
+// 			}
+// 			else
+// 			{
+// 				car_mode == 0;
+// 			}
+// 			
+// 		}		
+// 	}
+// }
 	
+

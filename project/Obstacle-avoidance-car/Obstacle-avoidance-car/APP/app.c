@@ -8,7 +8,7 @@
 
 volatile u16 g_distance;
 u8 g_counter=4, g_start_Flag=1;
-
+s32 ovf;
 
 
 
@@ -67,7 +67,7 @@ void car_Backword_30()
 {
 	while (g_distance <= 20)
 	{
-		g_distance = US_getdistance();
+		US_getdistance(&g_distance);
 		LCD_Clear();
 		PWM_set_duty(30,100);
 		timer_start(TIMER0_SCALER_8);
@@ -97,52 +97,74 @@ void Car_Stopping()
 	LCD_WriteString(" Cm");
 }
 
-// void startStage(void) {
-// 	u8 keyPressed = 0;
-// 	u8 buttonCounter = 0;
-// 	Button_State buttonState = 0;
-// 	/* Check the value of the key pressed
-// 	 * The vehicle won't start until key 1 is pressed. 
-// 	 */
-// 	do {
-// 		KEYPAD_getpressedkey(&keyPressed);
-// 	} while (keyPressed != '1');
-// 	
-// 	/* Key 1 is pressed. */
-// 	if (keyPressed == '1') {
-// 		LCD_WriteString("Set Def Rot");
-// 		LCD_SetCursor(1, 0);
-// 		LCD_WriteString("Right");
-// 		/* Initiate timer 2. */
-// 		//TIMER_2_init(NORMAL_MODE);
-// 		TIMER_2_INT();
-// 		/* Start timer 2. */
-// 		TIMER_2_start(PRECALER_1024);
-// 		while (overflowCount < 153) {
-// 			/* Check that state of the PB and increment if pressed. */
-// 			if (buttonState == pressed) {
-// 				buttonCounter++;
-// 				// TODO Add a delay to limit the debouncing effect if needed.
-// 			} else {
-// 				// Reset overflow counter.
-// 				overflowCount = 0;
-// 			}
-// 		}
-// 	}
-// 	/* If the PB pressed even number of times. */
-// 	if (buttonCounter % 2 == 0) {
-// 		LCD_Clear();
-// 		LCD_WriteString("Set Def. Rot.");
-// 		LCD_SetCursor(1, 0);
-// 		LCD_WriteString("Right");
-// 	} else {
-// 		LCD_Clear();
-// 		LCD_WriteString("Set Def. Rot.");
-// 		LCD_SetCursor(1, 0);
-// 		LCD_WriteString("Left");
-// 	}
-// 	
-// }
+/*
+void startStage(void) {
+	u8 keyPressed = 0;
+	u8 buttonCounter = 0;
+	Button_State buttonState = 0;
+	/ * Check the value of the key pressed
+	 * The vehicle won't start until key 1 is pressed. 
+	 * /
+	do {
+		KEYPAD_getpressedkey(&keyPressed);
+	} while (keyPressed != '1');	
+	/ * Key 1 is pressed. * /
+	if (keyPressed == '1') {
+		LCD_WriteString("Set Def Rot");
+		LCD_SetCursor(1, 0);
+		LCD_WriteString("Right");
+		/ * Initiate timer 2. * /
+		/ * Start timer 2. * /
+		TIMER_2_start(PRECALER_1024);
+		while (overflowCount < 153) {
+			/ * Check that state of the PB and increment if pressed. * /
+			if (buttonState == pressed) {
+				buttonCounter++;
+				// TODO Add a delay to limit the debouncing effect if needed.
+			} else {
+				// Reset overflow counter.
+				overflowCount = 0;
+			}
+		}
+	}
+	/ * If the PB pressed even number of times. * /
+	if (buttonCounter % 2 == 0) {
+		LCD_Clear();
+		LCD_WriteString("Set Def. Rot.");
+		LCD_SetCursor(1, 0);
+		LCD_WriteString("Right");
+	} else {
+		LCD_Clear();
+		LCD_WriteString("Set Def. Rot.");
+		LCD_SetCursor(1, 0);
+		LCD_WriteString("Left");
+	}	
+}*/
+
+
+void Speed_50_check()
+{
+	if(g_speed_flag == 1)
+	{
+		
+		if (ovf < mode_ovf ){
+			ovf++;
+		}
+		else if ( ovf == mode_ovf && mode_ovf!=0)
+		{
+			ovf =0 ;
+			if (car_mode ==0)
+			{
+				car_mode=1;	
+			}
+			else
+			{
+				car_mode == 0;
+			}
+			
+		}		
+	}
+}
 
 void app_init()
 {
@@ -154,8 +176,9 @@ void app_init()
 	LCD_Init();
 	KEYPAD_init();
 	DIO_initpin(PIND6,INPULL);
-	DIO_Init_All();
+	DIO_Init_All();	US_init();
 	TIMER_2_INT();
+	TIMER2_OV_SetCallBack(Speed_50_check);
 }
 
 void app_start()
@@ -165,7 +188,7 @@ void app_start()
 	
 	while (g_start_Flag)
 	{
-		g_distance = US_getdistance();
+		US_getdistance(&g_distance);
 		if (g_distance > 70 && car_mode == 0)
 		{
 			car_Forward_30();

@@ -184,27 +184,45 @@ void Timer1_OCA_SetCallBack(void(*LocalFptr)(void));
 void Timer1_OCB_SetCallBack(void(*LocalFptr)(void));
 void Timer1_ICU_SetCallBack(void(*LocalFptr)(void));
 
+void timer1_ReadCounts(u16 *pu16_timer1Counts);
+void timer1_setTimerValue(u8 timerValue);
 
+// typedef enum {
+// 	NORMAL_MODE,
+// 	FAST_PWM,
+// 	CTC,
+// 	PWM_PHASE_CORRECT	
+// }Timer2Mode_type; 
 
+// typedef enum{
+// 	PRECALER_1,
+// 	PRECALER_8,
+// 	PRECALER_64,
+// 	PRECALER_32, 
+// 	PRECALER_128, 
+// 	PRECALER_256,
+// 	PRECALER_1024,
+// }Timer2Scaler_type;
 
-typedef enum {
-	NORMAL_MODE,
-	FAST_PWM,
-	CTC,
-	PWM_PHASE_CORRECT	
-}Timer2Mode_type; 
+typedef enum
+{
+	TIMER2_NORMAL_MODE=0,
+	TIMER2_PHASECORRECT_MODE,
+	TIMER2_CTC_MODE,
+	TIMER2_FASTPWM_MODE
+
+}Timer2Mode_type;
 
 typedef enum{
-	PRECALER_1,
-	PRECALER_8,
-	PRECALER_64,
-	PRECALER_32, 
-	PRECALER_128, 
-	PRECALER_256,
-	PRECALER_1024,
+	TIMER2_STOP,
+	TIMER2_SCALER_1,
+	TIMER2_SCALER_8,
+	TIMER2_SCALER_32,
+	TIMER2_SCALER_64,
+	TIMER2_SCALER_128,
+	TIMER2_SCALER_256,
+	TIMER2_SCALER_1024,
 }Timer2Scaler_type;
-
-
 
 /********************************** TIMER_2_ ******************************************/
  EN_timerError_t TIMER_2_init(Timer2Mode_type a_mode);
@@ -213,6 +231,13 @@ void TIMER_2_stop(void);
  EN_timerError_t TIMER_2_setIntialValue(u8 a_value);
  EN_timerError_t TIMER_2_OvfNum(double overflow);
 void TIMER_2_DELAY_MS(double _delay);
-
 void TIMER_2_INT();
+
+void TIMER2_Init(Timer2Mode_type mode);
+EN_timerError_t timer2_start(Timer2Scaler_type scaler);
+EN_timerError_t TIMER_2_setIntialValue(u8 a_value);
+void TIMER2_OV_InterruptEnable(void);
+void TIMER2_OV_InterruptDisable(void);
+void TIMER2_OV_SetCallBack(void(*LocalFptr)(void));
+
 #endif /* TIMER_H_ */

@@ -12,12 +12,11 @@
 #include "../timers/timer.h"
 #include "../Interrupt/exi.h"
 
-#define ICU_CH     PINB2 
 
 
-void PWM_Measure(u32* Pfreq,u8* Pduty);
-static void Func_ICU(void);
-void PWM_Measure_exi(u32* Pfreq,u8* Pduty);
-static void Func_ICU_exi(void);
-void ICU_SW(u32* Pfreq,u8* Pduty);
+
+
+#define  ICU_EXI_INT  EX_INT2
+void    ICU_init ();
+u8 ICU_Read(u16 *pu16_PeriodTime);
 #endif /* ICU_H_ */

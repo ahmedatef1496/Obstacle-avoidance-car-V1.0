@@ -159,12 +159,6 @@
     <Compile Include="HAL\motor\motor.h">
       <SubType>compile</SubType>
     </Compile>
-    <Compile Include="HAL\ultrasonic\ultrasonic.c">
-      <SubType>compile</SubType>
-    </Compile>
-    <Compile Include="HAL\ultrasonic\ultrasonic.h">
-      <SubType>compile</SubType>
-    </Compile>
     <Compile Include="HAL\ultrasonic\us.c">
       <SubType>compile</SubType>
     </Compile>

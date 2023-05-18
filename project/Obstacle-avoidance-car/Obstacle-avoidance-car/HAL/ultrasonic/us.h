@@ -9,11 +9,16 @@
 #ifndef US_H_
 #define US_H_
 
-#include "../../mcal/dio/dio.h"
-#include "../../mcal/interrupt/exi.h"
-#include "../../mcal/TIMERS/timer.h"
+#include "../../mcal/icu/icu.h"
 
 
-u16 US_getdistance(void);
+
+#define ICU_TRIGGER_CH     PINB3 
+
+
+void US_init();
+u8 US_getdistance(u16 *pu16_distance);
+
+
 
 #endif /* US_H_ */

@@ -12,8 +12,6 @@ HAL\lcd\lcd.c
 
 HAL\motor\motor.c
 
-HAL\ultrasonic\ultrasonic.c
-
 HAL\ultrasonic\us.c
 
 main.c
