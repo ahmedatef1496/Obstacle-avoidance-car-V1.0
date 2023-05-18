@@ -11,13 +11,13 @@
 
 #include "../dio/dio.h"
 #include <math.h>
-
+#include "../../HAL/lcd/lcd.h"
 
 #define TIMR0_MAX_VALUE		256
 #define TIMR2_MAX_VALUE		256
 extern   u8 car_mode ;
 extern   s32 mode_ovf ;
-
+extern   u8 g_speed_flag;
 
 
 /*================================================================================================================*/

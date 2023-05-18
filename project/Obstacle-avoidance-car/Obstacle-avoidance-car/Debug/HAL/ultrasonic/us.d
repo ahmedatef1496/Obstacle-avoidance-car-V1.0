@@ -12,7 +12,9 @@ HAL/ultrasonic/us.d HAL/ultrasonic/us.o: ../HAL/ultrasonic/us.c \
  ../HAL/ultrasonic/../../mcal/interrupt/exi.h \
  ../HAL/ultrasonic/../../mcal/interrupt/../dio/dio.h \
  ../HAL/ultrasonic/../../mcal/TIMERS/timer.h \
- ../HAL/ultrasonic/../../mcal/TIMERS/../dio/dio.h
+ ../HAL/ultrasonic/../../mcal/TIMERS/../dio/dio.h \
+ ../HAL/ultrasonic/../../mcal/TIMERS/../../HAL/lcd/lcd.h \
+ ../HAL/ultrasonic/../../mcal/TIMERS/../../HAL/lcd/../../MCAL/dio/dio.h
 
 ../HAL/ultrasonic/us.h:
 
@@ -43,3 +45,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 ../HAL/ultrasonic/../../mcal/TIMERS/timer.h:
 
 ../HAL/ultrasonic/../../mcal/TIMERS/../dio/dio.h:
+
+../HAL/ultrasonic/../../mcal/TIMERS/../../HAL/lcd/lcd.h:
+
+../HAL/ultrasonic/../../mcal/TIMERS/../../HAL/lcd/../../MCAL/dio/dio.h:

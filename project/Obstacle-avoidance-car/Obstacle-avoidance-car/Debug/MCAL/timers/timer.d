@@ -8,7 +8,9 @@ MCAL/timers/timer.d MCAL/timers/timer.o: ../MCAL/timers/timer.c \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\stdint.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
- ../MCAL/timers/../dio/../../SERVIES/std_typs.h
+ ../MCAL/timers/../dio/../../SERVIES/std_typs.h \
+ ../MCAL/timers/../../HAL/lcd/lcd.h \
+ ../MCAL/timers/../../HAL/lcd/../../MCAL/dio/dio.h
 
 ../MCAL/timers/timer.h:
 
@@ -31,3 +33,7 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 ../MCAL/timers/../dio/../../SERVIES/std_typs.h:
+
+../MCAL/timers/../../HAL/lcd/lcd.h:
+
+../MCAL/timers/../../HAL/lcd/../../MCAL/dio/dio.h:

@@ -11,6 +11,7 @@ main.d main.o: .././main.c .././APP/app.h .././APP/../HAL/lcd/lcd.h \
  .././APP/../HAL/lcd/../../MCAL/dio/../../SERVIES/std_typs.h \
  .././APP/../MCAL/pwm/pwm.h .././APP/../MCAL/pwm/../timers/timer.h \
  .././APP/../MCAL/pwm/../timers/../dio/dio.h \
+ .././APP/../MCAL/pwm/../timers/../../HAL/lcd/lcd.h \
  .././APP/../MCAL/pwm/../Interrupt/exi.h \
  .././APP/../MCAL/pwm/../Interrupt/../dio/dio.h \
  .././APP/../MCAL/pwm/pwm_lcfg.h .././APP/../MCAL/pwm/../../HAL/lcd/lcd.h \
@@ -57,6 +58,8 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 .././APP/../MCAL/pwm/../timers/timer.h:
 
 .././APP/../MCAL/pwm/../timers/../dio/dio.h:
+
+.././APP/../MCAL/pwm/../timers/../../HAL/lcd/lcd.h:
 
 .././APP/../MCAL/pwm/../Interrupt/exi.h:
 

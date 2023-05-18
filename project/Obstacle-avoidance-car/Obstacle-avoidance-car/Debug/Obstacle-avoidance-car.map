@@ -192,7 +192,7 @@ Discarded input sections
                 0x00000000       0x92 MCAL/pwm/pwm.o
  .text.PWM_set_duty_hf
                 0x00000000       0xf4 MCAL/pwm/pwm.o
- .bss.OV.2051   0x00000000        0x4 MCAL/pwm/pwm.o
+ .bss.OV.2052   0x00000000        0x4 MCAL/pwm/pwm.o
  .text          0x00000000        0x0 MCAL/pwm/pwm_lcfg.o
  .data          0x00000000        0x0 MCAL/pwm/pwm_lcfg.o
  .bss           0x00000000        0x0 MCAL/pwm/pwm_lcfg.o
@@ -699,20 +699,20 @@ END GROUP
                 0x000000f6       0x56 APP/app.o
                 0x000000f6                car_Forward_50
  .text.car_Rotating
-                0x0000014c       0x64 APP/app.o
+                0x0000014c       0x76 APP/app.o
                 0x0000014c                car_Rotating
  .text.car_Backword_30
-                0x000001b0       0x56 APP/app.o
-                0x000001b0                car_Backword_30
+                0x000001c2       0x70 APP/app.o
+                0x000001c2                car_Backword_30
  .text.Car_Stopping
-                0x00000206       0x56 APP/app.o
-                0x00000206                Car_Stopping
+                0x00000232       0x56 APP/app.o
+                0x00000232                Car_Stopping
  .text.app_init
-                0x0000025c       0x2c APP/app.o
-                0x0000025c                app_init
+                0x00000288       0x2c APP/app.o
+                0x00000288                app_init
  .text.app_start
-                0x00000288       0xf4 APP/app.o
-                0x00000288                app_start
+                0x000002b4       0xc8 APP/app.o
+                0x000002b4                app_start
  .text.KEYPAD_init
                 0x0000037c       0x34 HAL/keypad/keypad.o
                 0x0000037c                KEYPAD_init
@@ -936,7 +936,7 @@ END GROUP
  *(.fini0)
                 0x00001866                _etext = .
 
-.data           0x00800060       0x82 load address 0x00001866
+.data           0x00800060       0x84 load address 0x00001866
                 0x00800060                PROVIDE (__data_start, .)
  *(.data)
  *(.data*)
@@ -946,68 +946,70 @@ END GROUP
  .data.g_counter
                 0x00800061        0x1 APP/app.o
                 0x00800061                g_counter
+ .data.g_speed_flag
+                0x00800062        0x1 MCAL/timers/timer.o
+                0x00800062                g_speed_flag
  *(.gnu.linkonce.d*)
  *(.rodata)
  *(.rodata*)
  .rodata.str1.1
-                0x00800062       0x60 APP/app.o
+                0x00800063       0x60 APP/app.o
  .rodata.PinsStatusArray
-                0x008000c2       0x20 MCAL/dio/dio_cfg.o
-                0x008000c2                PinsStatusArray
+                0x008000c3       0x20 MCAL/dio/dio_cfg.o
+                0x008000c3                PinsStatusArray
  *(.gnu.linkonce.r*)
-                0x008000e2                . = ALIGN (0x2)
-                0x008000e2                _edata = .
-                0x008000e2                PROVIDE (__data_end, .)
+                0x008000e4                . = ALIGN (0x2)
+ *fill*         0x008000e3        0x1 
+                0x008000e4                _edata = .
+                0x008000e4                PROVIDE (__data_end, .)
 
-.bss            0x008000e2       0x2b
-                0x008000e2                PROVIDE (__bss_start, .)
+.bss            0x008000e4       0x2a
+                0x008000e4                PROVIDE (__bss_start, .)
  *(.bss)
  *(.bss*)
- .bss.flag      0x008000e2        0x1 HAL/ultrasonic/us.o
-                0x008000e2                flag
+ .bss.flag      0x008000e4        0x1 HAL/ultrasonic/us.o
+                0x008000e4                flag
  .bss.INT2_Fptr
-                0x008000e3        0x2 MCAL/Interrupt/exi.o
- .bss.INT1_Fptr
                 0x008000e5        0x2 MCAL/Interrupt/exi.o
- .bss.INT0_Fptr
+ .bss.INT1_Fptr
                 0x008000e7        0x2 MCAL/Interrupt/exi.o
- .bss.OV.2039   0x008000e9        0x4 MCAL/pwm/pwm.o
+ .bss.INT0_Fptr
+                0x008000e9        0x2 MCAL/Interrupt/exi.o
+ .bss.OV.2040   0x008000eb        0x4 MCAL/pwm/pwm.o
  .bss.u32_OFFTicks
-                0x008000ed        0x4 MCAL/pwm/pwm.o
-                0x008000ed                u32_OFFTicks
+                0x008000ef        0x4 MCAL/pwm/pwm.o
+                0x008000ef                u32_OFFTicks
  .bss.u32_ONTicks
-                0x008000f1        0x4 MCAL/pwm/pwm.o
-                0x008000f1                u32_ONTicks
- .bss.car_flag  0x008000f5        0x1 MCAL/timers/timer.o
-                0x008000f5                car_flag
- .bss.ovf       0x008000f6        0x4 MCAL/timers/timer.o
- .bss.mode_ovf  0x008000fa        0x4 MCAL/timers/timer.o
-                0x008000fa                mode_ovf
- .bss.car_mode  0x008000fe        0x1 MCAL/timers/timer.o
-                0x008000fe                car_mode
+                0x008000f3        0x4 MCAL/pwm/pwm.o
+                0x008000f3                u32_ONTicks
+ .bss.ovf       0x008000f7        0x4 MCAL/timers/timer.o
+ .bss.mode_ovf  0x008000fb        0x4 MCAL/timers/timer.o
+                0x008000fb                mode_ovf
+ .bss.car_mode  0x008000ff        0x1 MCAL/timers/timer.o
+                0x008000ff                car_mode
  .bss.Timer1_ICU_Fptr
-                0x008000ff        0x2 MCAL/timers/timer.o
+                0x00800100        0x2 MCAL/timers/timer.o
  .bss.Timer1_OCB_Fptr
-                0x00800101        0x2 MCAL/timers/timer.o
+                0x00800102        0x2 MCAL/timers/timer.o
  .bss.Timer1_OVF_Fptr
-                0x00800103        0x2 MCAL/timers/timer.o
+                0x00800104        0x2 MCAL/timers/timer.o
  .bss.Timer0_OVF_Fptr
-                0x00800105        0x2 MCAL/timers/timer.o
+                0x00800106        0x2 MCAL/timers/timer.o
  *(COMMON)
- COMMON         0x00800107        0x2 APP/app.o
-                0x00800107                g_distance
- COMMON         0x00800109        0x4 HAL/ultrasonic/ultrasonic.o
-                0x00800109                t2
-                0x0080010b                t1
-                0x0080010d                PROVIDE (__bss_end, .)
+ COMMON         0x00800108        0x2 APP/app.o
+                0x00800108                g_distance
+ COMMON         0x0080010a        0x4 HAL/ultrasonic/ultrasonic.o
+                0x0080010a                t2
+                0x0080010c                t1
+                0x0080010e                PROVIDE (__bss_end, .)
                 0x00001866                __data_load_start = LOADADDR (.data)
-                0x000018e8                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x000018ea                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x0080010d        0x0
+.noinit         0x0080010e        0x0
                 [!provide]                PROVIDE (__noinit_start, .)
  *(.noinit*)
                 [!provide]                PROVIDE (__noinit_end, .)
-                0x0080010d                _end = .
+                0x0080010e                _end = .
                 [!provide]                PROVIDE (__heap_start, .)
 
 .eeprom         0x00810000        0x0
@@ -1113,53 +1115,53 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x00000000     0x480d
+.debug_info     0x00000000     0x4716
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x00000000      0x4e6 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_info    0x000004e6      0x99b APP/app.o
- .debug_info    0x00000e81      0x3a5 HAL/keypad/keypad.o
- .debug_info    0x00001226      0xbeb HAL/lcd/lcd.o
- .debug_info    0x00001e11      0x4a9 HAL/motor/motor.o
- .debug_info    0x000022ba      0x7fd HAL/ultrasonic/ultrasonic.o
- .debug_info    0x00002ab7      0x473 HAL/ultrasonic/us.o
- .debug_info    0x00002f2a       0xca main.o
- .debug_info    0x00002ff4      0x483 MCAL/dio/dio.o
- .debug_info    0x00003477      0x1a2 MCAL/dio/dio_cfg.o
- .debug_info    0x00003619      0x279 MCAL/Interrupt/exi.o
- .debug_info    0x00003892      0x4c8 MCAL/pwm/pwm.o
- .debug_info    0x00003d5a      0xab3 MCAL/timers/timer.o
+ .debug_info    0x000004e6      0x93f APP/app.o
+ .debug_info    0x00000e25      0x3a5 HAL/keypad/keypad.o
+ .debug_info    0x000011ca      0xbeb HAL/lcd/lcd.o
+ .debug_info    0x00001db5      0x4a9 HAL/motor/motor.o
+ .debug_info    0x0000225e      0x762 HAL/ultrasonic/ultrasonic.o
+ .debug_info    0x000029c0      0x473 HAL/ultrasonic/us.o
+ .debug_info    0x00002e33       0xca main.o
+ .debug_info    0x00002efd      0x483 MCAL/dio/dio.o
+ .debug_info    0x00003380      0x1a2 MCAL/dio/dio_cfg.o
+ .debug_info    0x00003522      0x279 MCAL/Interrupt/exi.o
+ .debug_info    0x0000379b      0x4c8 MCAL/pwm/pwm.o
+ .debug_info    0x00003c63      0xab3 MCAL/timers/timer.o
 
-.debug_abbrev   0x00000000     0x14b8
+.debug_abbrev   0x00000000     0x1495
  *(.debug_abbrev)
  .debug_abbrev  0x00000000      0x4a3 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
  .debug_abbrev  0x000004a3      0x148 APP/app.o
  .debug_abbrev  0x000005eb      0x15a HAL/keypad/keypad.o
  .debug_abbrev  0x00000745      0x1d6 HAL/lcd/lcd.o
  .debug_abbrev  0x0000091b       0xac HAL/motor/motor.o
- .debug_abbrev  0x000009c7      0x217 HAL/ultrasonic/ultrasonic.o
- .debug_abbrev  0x00000bde      0x19c HAL/ultrasonic/us.o
- .debug_abbrev  0x00000d7a       0x68 main.o
- .debug_abbrev  0x00000de2      0x152 MCAL/dio/dio.o
- .debug_abbrev  0x00000f34       0x75 MCAL/dio/dio_cfg.o
- .debug_abbrev  0x00000fa9       0xe4 MCAL/Interrupt/exi.o
- .debug_abbrev  0x0000108d      0x132 MCAL/pwm/pwm.o
- .debug_abbrev  0x000011bf      0x2f9 MCAL/timers/timer.o
+ .debug_abbrev  0x000009c7      0x1f4 HAL/ultrasonic/ultrasonic.o
+ .debug_abbrev  0x00000bbb      0x19c HAL/ultrasonic/us.o
+ .debug_abbrev  0x00000d57       0x68 main.o
+ .debug_abbrev  0x00000dbf      0x152 MCAL/dio/dio.o
+ .debug_abbrev  0x00000f11       0x75 MCAL/dio/dio_cfg.o
+ .debug_abbrev  0x00000f86       0xe4 MCAL/Interrupt/exi.o
+ .debug_abbrev  0x0000106a      0x132 MCAL/pwm/pwm.o
+ .debug_abbrev  0x0000119c      0x2f9 MCAL/timers/timer.o
 
-.debug_line     0x00000000     0x2584
+.debug_line     0x00000000     0x25d8
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x00000000      0x116 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_line    0x00000116      0x4bf APP/app.o
- .debug_line    0x000005d5      0x162 HAL/keypad/keypad.o
- .debug_line    0x00000737      0x501 HAL/lcd/lcd.o
- .debug_line    0x00000c38      0x178 HAL/motor/motor.o
- .debug_line    0x00000db0      0x370 HAL/ultrasonic/ultrasonic.o
- .debug_line    0x00001120      0x270 HAL/ultrasonic/us.o
- .debug_line    0x00001390       0x5b main.o
- .debug_line    0x000013eb      0x463 MCAL/dio/dio.o
- .debug_line    0x0000184e       0x3c MCAL/dio/dio_cfg.o
- .debug_line    0x0000188a      0x23c MCAL/Interrupt/exi.o
- .debug_line    0x00001ac6      0x201 MCAL/pwm/pwm.o
- .debug_line    0x00001cc7      0x8bd MCAL/timers/timer.o
+ .debug_line    0x00000116      0x4ce APP/app.o
+ .debug_line    0x000005e4      0x162 HAL/keypad/keypad.o
+ .debug_line    0x00000746      0x501 HAL/lcd/lcd.o
+ .debug_line    0x00000c47      0x178 HAL/motor/motor.o
+ .debug_line    0x00000dbf      0x3ab HAL/ultrasonic/ultrasonic.o
+ .debug_line    0x0000116a      0x270 HAL/ultrasonic/us.o
+ .debug_line    0x000013da       0x5b main.o
+ .debug_line    0x00001435      0x463 MCAL/dio/dio.o
+ .debug_line    0x00001898       0x3c MCAL/dio/dio_cfg.o
+ .debug_line    0x000018d4      0x23c MCAL/Interrupt/exi.o
+ .debug_line    0x00001b10      0x20b MCAL/pwm/pwm.o
+ .debug_line    0x00001d1b      0x8bd MCAL/timers/timer.o
 
 .debug_frame    0x00000000      0xac8
  *(.debug_frame)
@@ -1175,45 +1177,45 @@ END GROUP
  .debug_frame   0x0000054c       0xdc MCAL/pwm/pwm.o
  .debug_frame   0x00000628      0x4a0 MCAL/timers/timer.o
 
-.debug_str      0x00000000     0x1318
+.debug_str      0x00000000     0x131c
  *(.debug_str)
  .debug_str     0x00000000      0x196 C:/Program Files (x86)/Atmel/Studio/7.0/Packs/atmel/ATmega_DFP/1.7.374/gcc/dev/atmega32/avr5/crtatmega32.o
- .debug_str     0x00000196      0x4f1 APP/app.o
-                                0x525 (size before relaxing)
- .debug_str     0x00000687       0xee HAL/keypad/keypad.o
+ .debug_str     0x00000196      0x4fe APP/app.o
+                                0x532 (size before relaxing)
+ .debug_str     0x00000694       0xee HAL/keypad/keypad.o
                                 0x3a4 (size before relaxing)
- .debug_str     0x00000775       0x88 HAL/lcd/lcd.o
+ .debug_str     0x00000782       0x88 HAL/lcd/lcd.o
                                 0x3fa (size before relaxing)
- .debug_str     0x000007fd       0x3b HAL/motor/motor.o
+ .debug_str     0x0000080a       0x3b HAL/motor/motor.o
                                 0x36a (size before relaxing)
- .debug_str     0x00000838      0x232 HAL/ultrasonic/ultrasonic.o
+ .debug_str     0x00000845      0x232 HAL/ultrasonic/ultrasonic.o
                                 0x599 (size before relaxing)
- .debug_str     0x00000a6a       0x2b HAL/ultrasonic/us.o
+ .debug_str     0x00000a77       0x2b HAL/ultrasonic/us.o
                                 0x4c8 (size before relaxing)
- .debug_str     0x00000a95       0x11 main.o
+ .debug_str     0x00000aa2       0x11 main.o
                                 0x1fd (size before relaxing)
- .debug_str     0x00000aa6       0xfc MCAL/dio/dio.o
+ .debug_str     0x00000ab3       0xfc MCAL/dio/dio.o
                                 0x3fb (size before relaxing)
- .debug_str     0x00000ba2       0x16 MCAL/dio/dio_cfg.o
+ .debug_str     0x00000baf       0x16 MCAL/dio/dio_cfg.o
                                 0x2fb (size before relaxing)
- .debug_str     0x00000bb8       0xa7 MCAL/Interrupt/exi.o
+ .debug_str     0x00000bc5       0xa7 MCAL/Interrupt/exi.o
                                 0x2fc (size before relaxing)
- .debug_str     0x00000c5f      0x13f MCAL/pwm/pwm.o
+ .debug_str     0x00000c6c      0x13f MCAL/pwm/pwm.o
                                 0x44a (size before relaxing)
- .debug_str     0x00000d9e      0x57a MCAL/timers/timer.o
-                                0xa25 (size before relaxing)
+ .debug_str     0x00000dab      0x571 MCAL/timers/timer.o
+                                0xa29 (size before relaxing)
 
-.debug_loc      0x00000000     0x288e
+.debug_loc      0x00000000     0x27fe
  *(.debug_loc)
- .debug_loc     0x00000000       0xd8 APP/app.o
- .debug_loc     0x000000d8      0x11d HAL/keypad/keypad.o
- .debug_loc     0x000001f5      0x817 HAL/lcd/lcd.o
- .debug_loc     0x00000a0c       0xc9 HAL/ultrasonic/ultrasonic.o
- .debug_loc     0x00000ad5       0x6c HAL/ultrasonic/us.o
- .debug_loc     0x00000b41      0x976 MCAL/dio/dio.o
- .debug_loc     0x000014b7      0x422 MCAL/Interrupt/exi.o
- .debug_loc     0x000018d9      0x2d6 MCAL/pwm/pwm.o
- .debug_loc     0x00001baf      0xcdf MCAL/timers/timer.o
+ .debug_loc     0x00000000       0x48 APP/app.o
+ .debug_loc     0x00000048      0x11d HAL/keypad/keypad.o
+ .debug_loc     0x00000165      0x817 HAL/lcd/lcd.o
+ .debug_loc     0x0000097c       0xc9 HAL/ultrasonic/ultrasonic.o
+ .debug_loc     0x00000a45       0x6c HAL/ultrasonic/us.o
+ .debug_loc     0x00000ab1      0x976 MCAL/dio/dio.o
+ .debug_loc     0x00001427      0x422 MCAL/Interrupt/exi.o
+ .debug_loc     0x00001849      0x2d6 MCAL/pwm/pwm.o
+ .debug_loc     0x00001b1f      0xcdf MCAL/timers/timer.o
 
 .debug_macinfo
  *(.debug_macinfo)

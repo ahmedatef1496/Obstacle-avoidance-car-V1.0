@@ -5,29 +5,29 @@ Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
   0 .text         00001866  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  1 .data         00000082  00800060  00001866  000018fa  2**0
+  1 .data         00000084  00800060  00001866  000018fa  2**0
                   CONTENTS, ALLOC, LOAD, DATA
-  2 .bss          0000002b  008000e2  008000e2  0000197c  2**0
+  2 .bss          0000002a  008000e4  008000e4  0000197e  2**0
                   ALLOC
-  3 .comment      00000030  00000000  00000000  0000197c  2**0
+  3 .comment      00000030  00000000  00000000  0000197e  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000019ac  2**2
+  4 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000019b0  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 00000410  00000000  00000000  000019e8  2**0
+  5 .debug_aranges 00000410  00000000  00000000  000019ec  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   0000480d  00000000  00000000  00001df8  2**0
+  6 .debug_info   00004716  00000000  00000000  00001dfc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 000014b8  00000000  00000000  00006605  2**0
+  7 .debug_abbrev 00001495  00000000  00000000  00006512  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   00002584  00000000  00000000  00007abd  2**0
+  8 .debug_line   000025d8  00000000  00000000  000079a7  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  00000ac8  00000000  00000000  0000a044  2**2
+  9 .debug_frame  00000ac8  00000000  00000000  00009f80  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    00001318  00000000  00000000  0000ab0c  2**0
+ 10 .debug_str    0000131c  00000000  00000000  0000aa48  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    0000288e  00000000  00000000  0000be24  2**0
+ 11 .debug_loc    000027fe  00000000  00000000  0000bd64  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 00000348  00000000  00000000  0000e6b2  2**0
+ 12 .debug_ranges 00000348  00000000  00000000  0000e562  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -79,13 +79,13 @@ Disassembly of section .text:
       78:	02 c0       	rjmp	.+4      	; 0x7e <__do_copy_data+0x10>
       7a:	05 90       	lpm	r0, Z+
       7c:	0d 92       	st	X+, r0
-      7e:	a2 3e       	cpi	r26, 0xE2	; 226
+      7e:	a4 3e       	cpi	r26, 0xE4	; 228
       80:	b1 07       	cpc	r27, r17
       82:	d9 f7       	brne	.-10     	; 0x7a <__do_copy_data+0xc>
 
 00000084 <__do_clear_bss>:
       84:	21 e0       	ldi	r18, 0x01	; 1
-      86:	a2 ee       	ldi	r26, 0xE2	; 226
+      86:	a4 ee       	ldi	r26, 0xE4	; 228
       88:	b0 e0       	ldi	r27, 0x00	; 0
       8a:	01 c0       	rjmp	.+2      	; 0x8e <.do_clear_bss_start>
 
@@ -93,7 +93,7 @@ Disassembly of section .text:
       8c:	1d 92       	st	X+, r1
 
 0000008e <.do_clear_bss_start>:
-      8e:	ad 30       	cpi	r26, 0x0D	; 13
+      8e:	ae 30       	cpi	r26, 0x0E	; 14
       90:	b2 07       	cpc	r27, r18
       92:	e1 f7       	brne	.-8      	; 0x8c <.do_clear_bss_loop>
       94:	0e 94 2e 04 	call	0x85c	; 0x85c <main>
@@ -127,7 +127,7 @@ void car_Forward_30()
       be:	80 e0       	ldi	r24, 0x00	; 0
       c0:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
 	LCD_WriteString("Speed:30% Dir:	F");
-      c4:	82 e6       	ldi	r24, 0x62	; 98
+      c4:	83 e6       	ldi	r24, 0x63	; 99
       c6:	90 e0       	ldi	r25, 0x00	; 0
       c8:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	LCD_SetCursor(1,0);
@@ -135,17 +135,17 @@ void car_Forward_30()
       ce:	81 e0       	ldi	r24, 0x01	; 1
       d0:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
 	LCD_WriteString("Dist.:");
-      d4:	83 e7       	ldi	r24, 0x73	; 115
+      d4:	84 e7       	ldi	r24, 0x74	; 116
       d6:	90 e0       	ldi	r25, 0x00	; 0
       d8:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	LCD_WriteNumber(g_distance);
-      dc:	60 91 07 01 	lds	r22, 0x0107	; 0x800107 <g_distance>
-      e0:	70 91 08 01 	lds	r23, 0x0108	; 0x800108 <g_distance+0x1>
+      dc:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <g_distance>
+      e0:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <g_distance+0x1>
       e4:	80 e0       	ldi	r24, 0x00	; 0
       e6:	90 e0       	ldi	r25, 0x00	; 0
       e8:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
 	LCD_WriteString(" Cm");
-      ec:	8a e7       	ldi	r24, 0x7A	; 122
+      ec:	8b e7       	ldi	r24, 0x7B	; 123
       ee:	90 e0       	ldi	r25, 0x00	; 0
       f0:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
       f4:	08 95       	ret
@@ -174,7 +174,7 @@ void car_Forward_50()
      114:	80 e0       	ldi	r24, 0x00	; 0
      116:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
 	LCD_WriteString("Speed:50% Dir:	F");
-     11a:	8e e7       	ldi	r24, 0x7E	; 126
+     11a:	8f e7       	ldi	r24, 0x7F	; 127
      11c:	90 e0       	ldi	r25, 0x00	; 0
      11e:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	LCD_SetCursor(1,0);
@@ -182,17 +182,17 @@ void car_Forward_50()
      124:	81 e0       	ldi	r24, 0x01	; 1
      126:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
 	LCD_WriteString("Dist.:");
-     12a:	83 e7       	ldi	r24, 0x73	; 115
+     12a:	84 e7       	ldi	r24, 0x74	; 116
      12c:	90 e0       	ldi	r25, 0x00	; 0
      12e:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	LCD_WriteNumber(g_distance);
-     132:	60 91 07 01 	lds	r22, 0x0107	; 0x800107 <g_distance>
-     136:	70 91 08 01 	lds	r23, 0x0108	; 0x800108 <g_distance+0x1>
+     132:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <g_distance>
+     136:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <g_distance+0x1>
      13a:	80 e0       	ldi	r24, 0x00	; 0
      13c:	90 e0       	ldi	r25, 0x00	; 0
      13e:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
 	LCD_WriteString(" Cm");
-     142:	8a e7       	ldi	r24, 0x7A	; 122
+     142:	8b e7       	ldi	r24, 0x7B	; 123
      144:	90 e0       	ldi	r25, 0x00	; 0
      146:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
      14a:	08 95       	ret
@@ -219,7 +219,7 @@ void car_Rotating()
      166:	80 e0       	ldi	r24, 0x00	; 0
      168:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
 	LCD_WriteString("Speed:30% Dir:	R");
-     16c:	8f e8       	ldi	r24, 0x8F	; 143
+     16c:	80 e9       	ldi	r24, 0x90	; 144
      16e:	90 e0       	ldi	r25, 0x00	; 0
      170:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	LCD_SetCursor(1,0);
@@ -227,17 +227,17 @@ void car_Rotating()
      176:	81 e0       	ldi	r24, 0x01	; 1
      178:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
 	LCD_WriteString("Dist.:");
-     17c:	83 e7       	ldi	r24, 0x73	; 115
+     17c:	84 e7       	ldi	r24, 0x74	; 116
      17e:	90 e0       	ldi	r25, 0x00	; 0
      180:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	LCD_WriteNumber(g_distance);
-     184:	60 91 07 01 	lds	r22, 0x0107	; 0x800107 <g_distance>
-     188:	70 91 08 01 	lds	r23, 0x0108	; 0x800108 <g_distance+0x1>
+     184:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <g_distance>
+     188:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <g_distance+0x1>
      18c:	80 e0       	ldi	r24, 0x00	; 0
      18e:	90 e0       	ldi	r25, 0x00	; 0
      190:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
 	LCD_WriteString(" Cm");
-     194:	8a e7       	ldi	r24, 0x7A	; 122
+     194:	8b e7       	ldi	r24, 0x7B	; 123
      196:	90 e0       	ldi	r25, 0x00	; 0
      198:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
 	if (g_counter %2 == 0)
@@ -247,268 +247,274 @@ void car_Rotating()
 	{
 		Car_Rotate_Right();
      1a4:	0e 94 ab 03 	call	0x756	; 0x756 <Car_Rotate_Right>
-     1a8:	08 95       	ret
+     1a8:	02 c0       	rjmp	.+4      	; 0x1ae <car_Rotating+0x62>
 	}
 	else
 	{
 		Car_Rotate_Left();
      1aa:	0e 94 bd 03 	call	0x77a	; 0x77a <Car_Rotate_Left>
-     1ae:	08 95       	ret
-
-000001b0 <car_Backword_30>:
-}
-
-
-void car_Backword_30()
-{
-	LCD_Clear();
-     1b0:	0e 94 db 02 	call	0x5b6	; 0x5b6 <LCD_Clear>
-	PWM_set_duty(30,100);
-     1b4:	44 e6       	ldi	r20, 0x64	; 100
-     1b6:	50 e0       	ldi	r21, 0x00	; 0
-     1b8:	60 e0       	ldi	r22, 0x00	; 0
-     1ba:	70 e0       	ldi	r23, 0x00	; 0
-     1bc:	8e e1       	ldi	r24, 0x1E	; 30
-     1be:	0e 94 4c 07 	call	0xe98	; 0xe98 <PWM_set_duty>
-	timer_start(TIMER0_SCALER_8);
-     1c2:	82 e0       	ldi	r24, 0x02	; 2
-     1c4:	0e 94 da 07 	call	0xfb4	; 0xfb4 <timer_start>
-	Car_Moving_BWD();
-     1c8:	0e 94 87 03 	call	0x70e	; 0x70e <Car_Moving_BWD>
-	LCD_SetCursor(0,0);
-     1cc:	60 e0       	ldi	r22, 0x00	; 0
-     1ce:	80 e0       	ldi	r24, 0x00	; 0
-     1d0:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
-	LCD_WriteString("Speed:30% Dir:	B");
-     1d4:	80 ea       	ldi	r24, 0xA0	; 160
-     1d6:	90 e0       	ldi	r25, 0x00	; 0
-     1d8:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
-	LCD_SetCursor(1,0);
-     1dc:	60 e0       	ldi	r22, 0x00	; 0
-     1de:	81 e0       	ldi	r24, 0x01	; 1
-     1e0:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
-	LCD_WriteString("Dist.:");
-     1e4:	83 e7       	ldi	r24, 0x73	; 115
-     1e6:	90 e0       	ldi	r25, 0x00	; 0
-     1e8:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
-	LCD_WriteNumber(g_distance);
-     1ec:	60 91 07 01 	lds	r22, 0x0107	; 0x800107 <g_distance>
-     1f0:	70 91 08 01 	lds	r23, 0x0108	; 0x800108 <g_distance+0x1>
-     1f4:	80 e0       	ldi	r24, 0x00	; 0
-     1f6:	90 e0       	ldi	r25, 0x00	; 0
-     1f8:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
-	LCD_WriteString(" Cm");
-     1fc:	8a e7       	ldi	r24, 0x7A	; 122
-     1fe:	90 e0       	ldi	r25, 0x00	; 0
-     200:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
-     204:	08 95       	ret
-
-00000206 <Car_Stopping>:
-}
-
-
-void Car_Stopping()
-{
-	LCD_Clear();
-     206:	0e 94 db 02 	call	0x5b6	; 0x5b6 <LCD_Clear>
-	PWM_set_duty(0,100);
-     20a:	44 e6       	ldi	r20, 0x64	; 100
-     20c:	50 e0       	ldi	r21, 0x00	; 0
-     20e:	60 e0       	ldi	r22, 0x00	; 0
-     210:	70 e0       	ldi	r23, 0x00	; 0
-     212:	80 e0       	ldi	r24, 0x00	; 0
-     214:	0e 94 4c 07 	call	0xe98	; 0xe98 <PWM_set_duty>
-	timer_start(TIMER0_SCALER_8);
-     218:	82 e0       	ldi	r24, 0x02	; 2
-     21a:	0e 94 da 07 	call	0xfb4	; 0xfb4 <timer_start>
-	Car_Stop();
-     21e:	0e 94 99 03 	call	0x732	; 0x732 <Car_Stop>
-	LCD_SetCursor(0,0);
-     222:	60 e0       	ldi	r22, 0x00	; 0
-     224:	80 e0       	ldi	r24, 0x00	; 0
-     226:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
-	LCD_WriteString("Speed:00% Dir:	S");
-     22a:	81 eb       	ldi	r24, 0xB1	; 177
-     22c:	90 e0       	ldi	r25, 0x00	; 0
-     22e:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
-	LCD_SetCursor(1,0);
-     232:	60 e0       	ldi	r22, 0x00	; 0
-     234:	81 e0       	ldi	r24, 0x01	; 1
-     236:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
-	LCD_WriteString("Dist.:");
-     23a:	83 e7       	ldi	r24, 0x73	; 115
-     23c:	90 e0       	ldi	r25, 0x00	; 0
-     23e:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
-	LCD_WriteNumber(g_distance);
-     242:	60 91 07 01 	lds	r22, 0x0107	; 0x800107 <g_distance>
-     246:	70 91 08 01 	lds	r23, 0x0108	; 0x800108 <g_distance+0x1>
-     24a:	80 e0       	ldi	r24, 0x00	; 0
-     24c:	90 e0       	ldi	r25, 0x00	; 0
-     24e:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
-	LCD_WriteString(" Cm");
-     252:	8a e7       	ldi	r24, 0x7A	; 122
-     254:	90 e0       	ldi	r25, 0x00	; 0
-     256:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
-     25a:	08 95       	ret
-
-0000025c <app_init>:
-
-
-
-void app_init()
-{
-	LCD_PinsInit();
-     25c:	0e 94 46 03 	call	0x68c	; 0x68c <LCD_PinsInit>
-	LCD_Init();
-     260:	0e 94 98 02 	call	0x530	; 0x530 <LCD_Init>
-	GLOBALE_ENABLE();
-     264:	78 94       	sei
-	pwm_init();
-     266:	0e 94 3e 07 	call	0xe7c	; 0xe7c <pwm_init>
-	Car_Motors_init();
-     26a:	0e 94 63 03 	call	0x6c6	; 0x6c6 <Car_Motors_init>
-	LCD_Init();
-     26e:	0e 94 98 02 	call	0x530	; 0x530 <LCD_Init>
-	KEYPAD_init();
-     272:	0e 94 be 01 	call	0x37c	; 0x37c <KEYPAD_init>
-	DIO_initpin(PIND6,INPULL);
-     276:	62 e0       	ldi	r22, 0x02	; 2
-     278:	8e e1       	ldi	r24, 0x1E	; 30
-     27a:	0e 94 33 04 	call	0x866	; 0x866 <DIO_initpin>
-	DIO_Init_All();
-     27e:	0e 94 44 05 	call	0xa88	; 0xa88 <DIO_Init_All>
-	TIMER_2_INT();
-     282:	0e 94 6d 09 	call	0x12da	; 0x12da <TIMER_2_INT>
-     286:	08 95       	ret
-
-00000288 <app_start>:
-void app_start()
-{
-	//Start_stage();
-	
-	
-	while (g_start_Flag)
-     288:	74 c0       	rjmp	.+232    	; 0x372 <app_start+0xea>
-	{
-		g_distance = US_getdistance();
-     28a:	0e 94 ef 03 	call	0x7de	; 0x7de <US_getdistance>
-     28e:	90 93 08 01 	sts	0x0108, r25	; 0x800108 <g_distance+0x1>
-     292:	80 93 07 01 	sts	0x0107, r24	; 0x800107 <g_distance>
-		if (g_distance > 70 && car_mode == 0)
-     296:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     29a:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     29e:	87 34       	cpi	r24, 0x47	; 71
-     2a0:	91 05       	cpc	r25, r1
-     2a2:	98 f0       	brcs	.+38     	; 0x2ca <app_start+0x42>
-     2a4:	80 91 fe 00 	lds	r24, 0x00FE	; 0x8000fe <car_mode>
-     2a8:	81 11       	cpse	r24, r1
-     2aa:	0f c0       	rjmp	.+30     	; 0x2ca <app_start+0x42>
-		{
-			car_Forward_30();
-     2ac:	0e 94 50 00 	call	0xa0	; 0xa0 <car_Forward_30>
-			mode_ovf = 100;
-     2b0:	84 e6       	ldi	r24, 0x64	; 100
-     2b2:	90 e0       	ldi	r25, 0x00	; 0
-     2b4:	a0 e0       	ldi	r26, 0x00	; 0
-     2b6:	b0 e0       	ldi	r27, 0x00	; 0
-     2b8:	80 93 fa 00 	sts	0x00FA, r24	; 0x8000fa <mode_ovf>
-     2bc:	90 93 fb 00 	sts	0x00FB, r25	; 0x8000fb <mode_ovf+0x1>
-     2c0:	a0 93 fc 00 	sts	0x00FC, r26	; 0x8000fc <mode_ovf+0x2>
-     2c4:	b0 93 fd 00 	sts	0x00FD, r27	; 0x8000fd <mode_ovf+0x3>
-     2c8:	54 c0       	rjmp	.+168    	; 0x372 <app_start+0xea>
-		}
-		else if (car_mode == 1 && g_distance > 70)
-     2ca:	80 91 fe 00 	lds	r24, 0x00FE	; 0x8000fe <car_mode>
-     2ce:	81 30       	cpi	r24, 0x01	; 1
-     2d0:	51 f4       	brne	.+20     	; 0x2e6 <app_start+0x5e>
-     2d2:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     2d6:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     2da:	87 34       	cpi	r24, 0x47	; 71
-     2dc:	91 05       	cpc	r25, r1
-     2de:	18 f0       	brcs	.+6      	; 0x2e6 <app_start+0x5e>
-		{
-			car_Forward_50();
-     2e0:	0e 94 7b 00 	call	0xf6	; 0xf6 <car_Forward_50>
-     2e4:	46 c0       	rjmp	.+140    	; 0x372 <app_start+0xea>
-		}
-		else if (g_distance <= 70 && g_distance > 30)
-     2e6:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     2ea:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     2ee:	87 34       	cpi	r24, 0x47	; 71
-     2f0:	91 05       	cpc	r25, r1
-     2f2:	48 f4       	brcc	.+18     	; 0x306 <app_start+0x7e>
-     2f4:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     2f8:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     2fc:	4f 97       	sbiw	r24, 0x1f	; 31
-     2fe:	18 f0       	brcs	.+6      	; 0x306 <app_start+0x7e>
-		{
-			car_Forward_30();
-     300:	0e 94 50 00 	call	0xa0	; 0xa0 <car_Forward_30>
-     304:	36 c0       	rjmp	.+108    	; 0x372 <app_start+0xea>
-		}
-		else if (g_distance <= 30 && g_distance > 20)
-     306:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     30a:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     30e:	4f 97       	sbiw	r24, 0x1f	; 31
-     310:	e8 f4       	brcc	.+58     	; 0x34c <app_start+0xc4>
-     312:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     316:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     31a:	45 97       	sbiw	r24, 0x15	; 21
-     31c:	b8 f0       	brcs	.+46     	; 0x34c <app_start+0xc4>
-		{
-			Car_Stopping();
-     31e:	0e 94 03 01 	call	0x206	; 0x206 <Car_Stopping>
 	#else
 		//round up by default
 		__ticks_dc = (uint32_t)(ceil(fabs(__tmp)));
 	#endif
 
 	__builtin_avr_delay_cycles(__ticks_dc);
-     322:	2f ef       	ldi	r18, 0xFF	; 255
-     324:	87 ea       	ldi	r24, 0xA7	; 167
-     326:	91 e6       	ldi	r25, 0x61	; 97
-     328:	21 50       	subi	r18, 0x01	; 1
-     32a:	80 40       	sbci	r24, 0x00	; 0
-     32c:	90 40       	sbci	r25, 0x00	; 0
-     32e:	e1 f7       	brne	.-8      	; 0x328 <app_start+0xa0>
-     330:	00 c0       	rjmp	.+0      	; 0x332 <app_start+0xaa>
-     332:	00 00       	nop
-			_delay_ms(4000);
-			car_Rotating();
-     334:	0e 94 a6 00 	call	0x14c	; 0x14c <car_Rotating>
-     338:	2f ef       	ldi	r18, 0xFF	; 255
-     33a:	81 e1       	ldi	r24, 0x11	; 17
-     33c:	9a e7       	ldi	r25, 0x7A	; 122
-     33e:	21 50       	subi	r18, 0x01	; 1
-     340:	80 40       	sbci	r24, 0x00	; 0
-     342:	90 40       	sbci	r25, 0x00	; 0
-     344:	e1 f7       	brne	.-8      	; 0x33e <app_start+0xb6>
-     346:	00 c0       	rjmp	.+0      	; 0x348 <app_start+0xc0>
-     348:	00 00       	nop
-     34a:	13 c0       	rjmp	.+38     	; 0x372 <app_start+0xea>
-			_delay_ms(5000);
+     1ae:	2f ef       	ldi	r18, 0xFF	; 255
+     1b0:	8d e3       	ldi	r24, 0x3D	; 61
+     1b2:	99 e4       	ldi	r25, 0x49	; 73
+     1b4:	21 50       	subi	r18, 0x01	; 1
+     1b6:	80 40       	sbci	r24, 0x00	; 0
+     1b8:	90 40       	sbci	r25, 0x00	; 0
+     1ba:	e1 f7       	brne	.-8      	; 0x1b4 <car_Rotating+0x68>
+     1bc:	00 c0       	rjmp	.+0      	; 0x1be <car_Rotating+0x72>
+     1be:	00 00       	nop
+     1c0:	08 95       	ret
 
+000001c2 <car_Backword_30>:
+}
+
+
+void car_Backword_30()
+{
+	while (g_distance <= 20)
+     1c2:	30 c0       	rjmp	.+96     	; 0x224 <car_Backword_30+0x62>
+	{
+		g_distance = US_getdistance();
+     1c4:	0e 94 ef 03 	call	0x7de	; 0x7de <US_getdistance>
+     1c8:	90 93 09 01 	sts	0x0109, r25	; 0x800109 <g_distance+0x1>
+     1cc:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <g_distance>
+		LCD_Clear();
+     1d0:	0e 94 db 02 	call	0x5b6	; 0x5b6 <LCD_Clear>
+		PWM_set_duty(30,100);
+     1d4:	44 e6       	ldi	r20, 0x64	; 100
+     1d6:	50 e0       	ldi	r21, 0x00	; 0
+     1d8:	60 e0       	ldi	r22, 0x00	; 0
+     1da:	70 e0       	ldi	r23, 0x00	; 0
+     1dc:	8e e1       	ldi	r24, 0x1E	; 30
+     1de:	0e 94 4c 07 	call	0xe98	; 0xe98 <PWM_set_duty>
+		timer_start(TIMER0_SCALER_8);
+     1e2:	82 e0       	ldi	r24, 0x02	; 2
+     1e4:	0e 94 da 07 	call	0xfb4	; 0xfb4 <timer_start>
+		Car_Moving_BWD();
+     1e8:	0e 94 87 03 	call	0x70e	; 0x70e <Car_Moving_BWD>
+		LCD_SetCursor(0,0);
+     1ec:	60 e0       	ldi	r22, 0x00	; 0
+     1ee:	80 e0       	ldi	r24, 0x00	; 0
+     1f0:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
+		LCD_WriteString("Speed:30% Dir:	B");
+     1f4:	81 ea       	ldi	r24, 0xA1	; 161
+     1f6:	90 e0       	ldi	r25, 0x00	; 0
+     1f8:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
+		LCD_SetCursor(1,0);
+     1fc:	60 e0       	ldi	r22, 0x00	; 0
+     1fe:	81 e0       	ldi	r24, 0x01	; 1
+     200:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
+		LCD_WriteString("Dist.:");
+     204:	84 e7       	ldi	r24, 0x74	; 116
+     206:	90 e0       	ldi	r25, 0x00	; 0
+     208:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
+		LCD_WriteNumber(g_distance);
+     20c:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <g_distance>
+     210:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <g_distance+0x1>
+     214:	80 e0       	ldi	r24, 0x00	; 0
+     216:	90 e0       	ldi	r25, 0x00	; 0
+     218:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
+		LCD_WriteString(" Cm");
+     21c:	8b e7       	ldi	r24, 0x7B	; 123
+     21e:	90 e0       	ldi	r25, 0x00	; 0
+     220:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
+}
+
+
+void car_Backword_30()
+{
+	while (g_distance <= 20)
+     224:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     228:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     22c:	45 97       	sbiw	r24, 0x15	; 21
+     22e:	50 f2       	brcs	.-108    	; 0x1c4 <car_Backword_30+0x2>
+		LCD_WriteString("Dist.:");
+		LCD_WriteNumber(g_distance);
+		LCD_WriteString(" Cm");
+	}
+	
+}
+     230:	08 95       	ret
+
+00000232 <Car_Stopping>:
+
+
+void Car_Stopping()
+{
+	LCD_Clear();
+     232:	0e 94 db 02 	call	0x5b6	; 0x5b6 <LCD_Clear>
+	PWM_set_duty(0,100);
+     236:	44 e6       	ldi	r20, 0x64	; 100
+     238:	50 e0       	ldi	r21, 0x00	; 0
+     23a:	60 e0       	ldi	r22, 0x00	; 0
+     23c:	70 e0       	ldi	r23, 0x00	; 0
+     23e:	80 e0       	ldi	r24, 0x00	; 0
+     240:	0e 94 4c 07 	call	0xe98	; 0xe98 <PWM_set_duty>
+	timer_start(TIMER0_SCALER_8);
+     244:	82 e0       	ldi	r24, 0x02	; 2
+     246:	0e 94 da 07 	call	0xfb4	; 0xfb4 <timer_start>
+	Car_Stop();
+     24a:	0e 94 99 03 	call	0x732	; 0x732 <Car_Stop>
+	LCD_SetCursor(0,0);
+     24e:	60 e0       	ldi	r22, 0x00	; 0
+     250:	80 e0       	ldi	r24, 0x00	; 0
+     252:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
+	LCD_WriteString("Speed:00% Dir:	S");
+     256:	82 eb       	ldi	r24, 0xB2	; 178
+     258:	90 e0       	ldi	r25, 0x00	; 0
+     25a:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
+	LCD_SetCursor(1,0);
+     25e:	60 e0       	ldi	r22, 0x00	; 0
+     260:	81 e0       	ldi	r24, 0x01	; 1
+     262:	0e 94 cd 02 	call	0x59a	; 0x59a <LCD_SetCursor>
+	LCD_WriteString("Dist.:");
+     266:	84 e7       	ldi	r24, 0x74	; 116
+     268:	90 e0       	ldi	r25, 0x00	; 0
+     26a:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
+	LCD_WriteNumber(g_distance);
+     26e:	60 91 08 01 	lds	r22, 0x0108	; 0x800108 <g_distance>
+     272:	70 91 09 01 	lds	r23, 0x0109	; 0x800109 <g_distance+0x1>
+     276:	80 e0       	ldi	r24, 0x00	; 0
+     278:	90 e0       	ldi	r25, 0x00	; 0
+     27a:	0e 94 e5 02 	call	0x5ca	; 0x5ca <LCD_WriteNumber>
+	LCD_WriteString(" Cm");
+     27e:	8b e7       	ldi	r24, 0x7B	; 123
+     280:	90 e0       	ldi	r25, 0x00	; 0
+     282:	0e 94 ba 02 	call	0x574	; 0x574 <LCD_WriteString>
+     286:	08 95       	ret
+
+00000288 <app_init>:
+// 	
+// }
+
+void app_init()
+{
+	LCD_PinsInit();
+     288:	0e 94 46 03 	call	0x68c	; 0x68c <LCD_PinsInit>
+	LCD_Init();
+     28c:	0e 94 98 02 	call	0x530	; 0x530 <LCD_Init>
+	GLOBALE_ENABLE();
+     290:	78 94       	sei
+	pwm_init();
+     292:	0e 94 3e 07 	call	0xe7c	; 0xe7c <pwm_init>
+	Car_Motors_init();
+     296:	0e 94 63 03 	call	0x6c6	; 0x6c6 <Car_Motors_init>
+	LCD_Init();
+     29a:	0e 94 98 02 	call	0x530	; 0x530 <LCD_Init>
+	KEYPAD_init();
+     29e:	0e 94 be 01 	call	0x37c	; 0x37c <KEYPAD_init>
+	DIO_initpin(PIND6,INPULL);
+     2a2:	62 e0       	ldi	r22, 0x02	; 2
+     2a4:	8e e1       	ldi	r24, 0x1E	; 30
+     2a6:	0e 94 33 04 	call	0x866	; 0x866 <DIO_initpin>
+	DIO_Init_All();
+     2aa:	0e 94 44 05 	call	0xa88	; 0xa88 <DIO_Init_All>
+	TIMER_2_INT();
+     2ae:	0e 94 6d 09 	call	0x12da	; 0x12da <TIMER_2_INT>
+     2b2:	08 95       	ret
+
+000002b4 <app_start>:
+void app_start()
+{
+	//Start_stage();
+	
+	
+	while (g_start_Flag)
+     2b4:	5e c0       	rjmp	.+188    	; 0x372 <app_start+0xbe>
+	{
+		g_distance = US_getdistance();
+     2b6:	0e 94 ef 03 	call	0x7de	; 0x7de <US_getdistance>
+     2ba:	90 93 09 01 	sts	0x0109, r25	; 0x800109 <g_distance+0x1>
+     2be:	80 93 08 01 	sts	0x0108, r24	; 0x800108 <g_distance>
+		if (g_distance > 70 && car_mode == 0)
+     2c2:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     2c6:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     2ca:	87 34       	cpi	r24, 0x47	; 71
+     2cc:	91 05       	cpc	r25, r1
+     2ce:	b0 f0       	brcs	.+44     	; 0x2fc <app_start+0x48>
+     2d0:	80 91 ff 00 	lds	r24, 0x00FF	; 0x8000ff <car_mode>
+     2d4:	81 11       	cpse	r24, r1
+     2d6:	12 c0       	rjmp	.+36     	; 0x2fc <app_start+0x48>
+		{
+			car_Forward_30();
+     2d8:	0e 94 50 00 	call	0xa0	; 0xa0 <car_Forward_30>
+			g_speed_flag = 1;
+     2dc:	81 e0       	ldi	r24, 0x01	; 1
+     2de:	80 93 62 00 	sts	0x0062, r24	; 0x800062 <g_speed_flag>
+			mode_ovf = 100000;
+     2e2:	80 ea       	ldi	r24, 0xA0	; 160
+     2e4:	96 e8       	ldi	r25, 0x86	; 134
+     2e6:	a1 e0       	ldi	r26, 0x01	; 1
+     2e8:	b0 e0       	ldi	r27, 0x00	; 0
+     2ea:	80 93 fb 00 	sts	0x00FB, r24	; 0x8000fb <mode_ovf>
+     2ee:	90 93 fc 00 	sts	0x00FC, r25	; 0x8000fc <mode_ovf+0x1>
+     2f2:	a0 93 fd 00 	sts	0x00FD, r26	; 0x8000fd <mode_ovf+0x2>
+     2f6:	b0 93 fe 00 	sts	0x00FE, r27	; 0x8000fe <mode_ovf+0x3>
+     2fa:	3b c0       	rjmp	.+118    	; 0x372 <app_start+0xbe>
 		}
-		else if (g_distance <= 20)
-     34c:	80 91 07 01 	lds	r24, 0x0107	; 0x800107 <g_distance>
-     350:	90 91 08 01 	lds	r25, 0x0108	; 0x800108 <g_distance+0x1>
-     354:	45 97       	sbiw	r24, 0x15	; 21
-     356:	68 f4       	brcc	.+26     	; 0x372 <app_start+0xea>
+		else if (car_mode == 1 && g_distance > 70)
+     2fc:	80 91 ff 00 	lds	r24, 0x00FF	; 0x8000ff <car_mode>
+     300:	81 30       	cpi	r24, 0x01	; 1
+     302:	51 f4       	brne	.+20     	; 0x318 <app_start+0x64>
+     304:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     308:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     30c:	87 34       	cpi	r24, 0x47	; 71
+     30e:	91 05       	cpc	r25, r1
+     310:	18 f0       	brcs	.+6      	; 0x318 <app_start+0x64>
+		{
+			car_Forward_50();
+     312:	0e 94 7b 00 	call	0xf6	; 0xf6 <car_Forward_50>
+     316:	2d c0       	rjmp	.+90     	; 0x372 <app_start+0xbe>
+		}
+		else if (g_distance <= 70 && g_distance > 30)
+     318:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     31c:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     320:	87 34       	cpi	r24, 0x47	; 71
+     322:	91 05       	cpc	r25, r1
+     324:	58 f4       	brcc	.+22     	; 0x33c <app_start+0x88>
+     326:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     32a:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     32e:	4f 97       	sbiw	r24, 0x1f	; 31
+     330:	28 f0       	brcs	.+10     	; 0x33c <app_start+0x88>
+		{
+			car_mode = 0;
+     332:	10 92 ff 00 	sts	0x00FF, r1	; 0x8000ff <car_mode>
+			car_Forward_30();
+     336:	0e 94 50 00 	call	0xa0	; 0xa0 <car_Forward_30>
+     33a:	1b c0       	rjmp	.+54     	; 0x372 <app_start+0xbe>
+		}
+		else if (g_distance <= 30 && g_distance > 20)
+     33c:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     340:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     344:	4f 97       	sbiw	r24, 0x1f	; 31
+     346:	58 f4       	brcc	.+22     	; 0x35e <app_start+0xaa>
+     348:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     34c:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     350:	45 97       	sbiw	r24, 0x15	; 21
+     352:	28 f0       	brcs	.+10     	; 0x35e <app_start+0xaa>
 		{
 			Car_Stopping();
-     358:	0e 94 03 01 	call	0x206	; 0x206 <Car_Stopping>
-     35c:	2f ef       	ldi	r18, 0xFF	; 255
-     35e:	87 ea       	ldi	r24, 0xA7	; 167
-     360:	91 e6       	ldi	r25, 0x61	; 97
-     362:	21 50       	subi	r18, 0x01	; 1
-     364:	80 40       	sbci	r24, 0x00	; 0
-     366:	90 40       	sbci	r25, 0x00	; 0
-     368:	e1 f7       	brne	.-8      	; 0x362 <app_start+0xda>
-     36a:	00 c0       	rjmp	.+0      	; 0x36c <app_start+0xe4>
-     36c:	00 00       	nop
-			_delay_ms(4000);
+     354:	0e 94 19 01 	call	0x232	; 0x232 <Car_Stopping>
+			
+			car_Rotating();
+     358:	0e 94 a6 00 	call	0x14c	; 0x14c <car_Rotating>
+     35c:	0a c0       	rjmp	.+20     	; 0x372 <app_start+0xbe>
+		}
+		else if (g_distance <= 20)
+     35e:	80 91 08 01 	lds	r24, 0x0108	; 0x800108 <g_distance>
+     362:	90 91 09 01 	lds	r25, 0x0109	; 0x800109 <g_distance+0x1>
+     366:	45 97       	sbiw	r24, 0x15	; 21
+     368:	20 f4       	brcc	.+8      	; 0x372 <app_start+0xbe>
+		{
+			Car_Stopping();
+     36a:	0e 94 19 01 	call	0x232	; 0x232 <Car_Stopping>
 			car_Backword_30();
-     36e:	0e 94 d8 00 	call	0x1b0	; 0x1b0 <car_Backword_30>
+     36e:	0e 94 e1 00 	call	0x1c2	; 0x1c2 <car_Backword_30>
 void app_start()
 {
 	//Start_stage();
@@ -517,9 +523,9 @@ void app_start()
 	while (g_start_Flag)
      372:	80 91 60 00 	lds	r24, 0x0060	; 0x800060 <__DATA_REGION_ORIGIN__>
      376:	81 11       	cpse	r24, r1
-     378:	88 cf       	rjmp	.-240    	; 0x28a <app_start+0x2>
+     378:	9e cf       	rjmp	.-196    	; 0x2b6 <app_start+0x2>
+		{
 			Car_Stopping();
-			_delay_ms(4000);
 			car_Backword_30();
 		}
 	}
@@ -1124,37 +1130,37 @@ volatile u16 t1,t2,t3;
 void USCallBackFun(void)
 {
 	if (flag==0)
-     79e:	80 91 e2 00 	lds	r24, 0x00E2	; 0x8000e2 <__data_end>
+     79e:	80 91 e4 00 	lds	r24, 0x00E4	; 0x8000e4 <__data_end>
      7a2:	81 11       	cpse	r24, r1
      7a4:	0e c0       	rjmp	.+28     	; 0x7c2 <USCallBackFun+0x24>
 	{
 		t1=TCNT1;
      7a6:	8c b5       	in	r24, 0x2c	; 44
      7a8:	9d b5       	in	r25, 0x2d	; 45
-     7aa:	90 93 0c 01 	sts	0x010C, r25	; 0x80010c <t1+0x1>
-     7ae:	80 93 0b 01 	sts	0x010B, r24	; 0x80010b <t1>
+     7aa:	90 93 0d 01 	sts	0x010D, r25	; 0x80010d <t1+0x1>
+     7ae:	80 93 0c 01 	sts	0x010C, r24	; 0x80010c <t1>
 		EXI_TriggerEdge(EX_INT2,FALLING_EDGE);
      7b2:	62 e0       	ldi	r22, 0x02	; 2
      7b4:	82 e0       	ldi	r24, 0x02	; 2
      7b6:	0e 94 fb 05 	call	0xbf6	; 0xbf6 <EXI_TriggerEdge>
 		flag=1;
      7ba:	81 e0       	ldi	r24, 0x01	; 1
-     7bc:	80 93 e2 00 	sts	0x00E2, r24	; 0x8000e2 <__data_end>
+     7bc:	80 93 e4 00 	sts	0x00E4, r24	; 0x8000e4 <__data_end>
      7c0:	08 95       	ret
 	}
 	else if (flag==1)
-     7c2:	80 91 e2 00 	lds	r24, 0x00E2	; 0x8000e2 <__data_end>
+     7c2:	80 91 e4 00 	lds	r24, 0x00E4	; 0x8000e4 <__data_end>
      7c6:	81 30       	cpi	r24, 0x01	; 1
      7c8:	49 f4       	brne	.+18     	; 0x7dc <USCallBackFun+0x3e>
 	{
 		t2=TCNT1;
      7ca:	8c b5       	in	r24, 0x2c	; 44
      7cc:	9d b5       	in	r25, 0x2d	; 45
-     7ce:	90 93 0a 01 	sts	0x010A, r25	; 0x80010a <t2+0x1>
-     7d2:	80 93 09 01 	sts	0x0109, r24	; 0x800109 <t2>
+     7ce:	90 93 0b 01 	sts	0x010B, r25	; 0x80010b <t2+0x1>
+     7d2:	80 93 0a 01 	sts	0x010A, r24	; 0x80010a <t2>
 		flag=2;
      7d6:	82 e0       	ldi	r24, 0x02	; 2
-     7d8:	80 93 e2 00 	sts	0x00E2, r24	; 0x8000e2 <__data_end>
+     7d8:	80 93 e4 00 	sts	0x00E4, r24	; 0x8000e4 <__data_end>
      7dc:	08 95       	ret
 
 000007de <US_getdistance>:
@@ -1191,7 +1197,7 @@ void USCallBackFun(void)
      802:	1d bc       	out	0x2d, r1	; 45
      804:	1c bc       	out	0x2c, r1	; 44
 		flag=0;
-     806:	10 92 e2 00 	sts	0x00E2, r1	; 0x8000e2 <__data_end>
+     806:	10 92 e4 00 	sts	0x00E4, r1	; 0x8000e4 <__data_end>
 		EXI_TriggerEdge(EX_INT2,RISING_EDGE);
      80a:	63 e0       	ldi	r22, 0x03	; 3
      80c:	82 e0       	ldi	r24, 0x02	; 2
@@ -1216,14 +1222,14 @@ void USCallBackFun(void)
      824:	8b e0       	ldi	r24, 0x0B	; 11
      826:	0e 94 54 05 	call	0xaa8	; 0xaa8 <DIO_writepin>
 		while(flag<2);
-     82a:	80 91 e2 00 	lds	r24, 0x00E2	; 0x8000e2 <__data_end>
+     82a:	80 91 e4 00 	lds	r24, 0x00E4	; 0x8000e4 <__data_end>
      82e:	82 30       	cpi	r24, 0x02	; 2
      830:	e0 f3       	brcs	.-8      	; 0x82a <__DATA_REGION_LENGTH__+0x2a>
 		time=(t2-t1);
-     832:	20 91 09 01 	lds	r18, 0x0109	; 0x800109 <t2>
-     836:	30 91 0a 01 	lds	r19, 0x010A	; 0x80010a <t2+0x1>
-     83a:	80 91 0b 01 	lds	r24, 0x010B	; 0x80010b <t1>
-     83e:	90 91 0c 01 	lds	r25, 0x010C	; 0x80010c <t1+0x1>
+     832:	20 91 0a 01 	lds	r18, 0x010A	; 0x80010a <t2>
+     836:	30 91 0b 01 	lds	r19, 0x010B	; 0x80010b <t2+0x1>
+     83a:	80 91 0c 01 	lds	r24, 0x010C	; 0x80010c <t1>
+     83e:	90 91 0d 01 	lds	r25, 0x010D	; 0x80010d <t1+0x1>
      842:	28 1b       	sub	r18, r24
      844:	39 0b       	sbc	r19, r25
 		u16_d=(time/58);
@@ -1247,12 +1253,12 @@ int main(void)
 {   
 	
 	 app_init();
-     85c:	0e 94 2e 01 	call	0x25c	; 0x25c <app_init>
+     85c:	0e 94 44 01 	call	0x288	; 0x288 <app_init>
 
     while (1) 
     {
 		app_start();
-     860:	0e 94 44 01 	call	0x288	; 0x288 <app_start>
+     860:	0e 94 5a 01 	call	0x2b4	; 0x2b4 <app_start>
      864:	fd cf       	rjmp	.-6      	; 0x860 <__stack+0x1>
 
 00000866 <DIO_initpin>:
@@ -1787,7 +1793,7 @@ int main(void)
 		  DIO_initpin(i,PinsStatusArray[i]);
      a8e:	ec 2f       	mov	r30, r28
      a90:	f0 e0       	ldi	r31, 0x00	; 0
-     a92:	ee 53       	subi	r30, 0x3E	; 62
+     a92:	ed 53       	subi	r30, 0x3D	; 61
      a94:	ff 4f       	sbci	r31, 0xFF	; 255
      a96:	60 81       	ld	r22, Z
      a98:	8c 2f       	mov	r24, r28
@@ -2265,20 +2271,20 @@ void EXI_SetCallBack(ExInterruptSource_type Interrupt,void(*LocalPtr)(void))
      cc0:	08 95       	ret
 		case EX_INT0:
 		INT0_Fptr=LocalPtr;
-     cc2:	70 93 e8 00 	sts	0x00E8, r23	; 0x8000e8 <INT0_Fptr+0x1>
-     cc6:	60 93 e7 00 	sts	0x00E7, r22	; 0x8000e7 <INT0_Fptr>
+     cc2:	70 93 ea 00 	sts	0x00EA, r23	; 0x8000ea <INT0_Fptr+0x1>
+     cc6:	60 93 e9 00 	sts	0x00E9, r22	; 0x8000e9 <INT0_Fptr>
 		break;
      cca:	08 95       	ret
 		case EX_INT1:
 		INT1_Fptr=LocalPtr;
-     ccc:	70 93 e6 00 	sts	0x00E6, r23	; 0x8000e6 <INT1_Fptr+0x1>
-     cd0:	60 93 e5 00 	sts	0x00E5, r22	; 0x8000e5 <INT1_Fptr>
+     ccc:	70 93 e8 00 	sts	0x00E8, r23	; 0x8000e8 <INT1_Fptr+0x1>
+     cd0:	60 93 e7 00 	sts	0x00E7, r22	; 0x8000e7 <INT1_Fptr>
 		break;
      cd4:	08 95       	ret
 		case EX_INT2:
 		INT2_Fptr=LocalPtr;
-     cd6:	70 93 e4 00 	sts	0x00E4, r23	; 0x8000e4 <INT2_Fptr+0x1>
-     cda:	60 93 e3 00 	sts	0x00E3, r22	; 0x8000e3 <INT2_Fptr>
+     cd6:	70 93 e6 00 	sts	0x00E6, r23	; 0x8000e6 <INT2_Fptr+0x1>
+     cda:	60 93 e5 00 	sts	0x00E5, r22	; 0x8000e5 <INT2_Fptr>
      cde:	08 95       	ret
 
 00000ce0 <__vector_1>:
@@ -2306,8 +2312,8 @@ ISR(INT0_vect)
      cfe:	ef 93       	push	r30
      d00:	ff 93       	push	r31
 	if (INT0_Fptr!=NULLPTR)
-     d02:	e0 91 e7 00 	lds	r30, 0x00E7	; 0x8000e7 <INT0_Fptr>
-     d06:	f0 91 e8 00 	lds	r31, 0x00E8	; 0x8000e8 <INT0_Fptr+0x1>
+     d02:	e0 91 e9 00 	lds	r30, 0x00E9	; 0x8000e9 <INT0_Fptr>
+     d06:	f0 91 ea 00 	lds	r31, 0x00EA	; 0x8000ea <INT0_Fptr+0x1>
      d0a:	30 97       	sbiw	r30, 0x00	; 0
      d0c:	09 f0       	breq	.+2      	; 0xd10 <__vector_1+0x30>
 	{
@@ -2354,8 +2360,8 @@ ISR(INT1_vect)
      d50:	ef 93       	push	r30
      d52:	ff 93       	push	r31
 	if (INT1_Fptr!=NULLPTR)
-     d54:	e0 91 e5 00 	lds	r30, 0x00E5	; 0x8000e5 <INT1_Fptr>
-     d58:	f0 91 e6 00 	lds	r31, 0x00E6	; 0x8000e6 <INT1_Fptr+0x1>
+     d54:	e0 91 e7 00 	lds	r30, 0x00E7	; 0x8000e7 <INT1_Fptr>
+     d58:	f0 91 e8 00 	lds	r31, 0x00E8	; 0x8000e8 <INT1_Fptr+0x1>
      d5c:	30 97       	sbiw	r30, 0x00	; 0
      d5e:	09 f0       	breq	.+2      	; 0xd62 <__vector_2+0x30>
 	{
@@ -2402,8 +2408,8 @@ ISR(INT2_vect)
      da2:	ef 93       	push	r30
      da4:	ff 93       	push	r31
 	if (INT2_Fptr!=NULLPTR)
-     da6:	e0 91 e3 00 	lds	r30, 0x00E3	; 0x8000e3 <INT2_Fptr>
-     daa:	f0 91 e4 00 	lds	r31, 0x00E4	; 0x8000e4 <INT2_Fptr+0x1>
+     da6:	e0 91 e5 00 	lds	r30, 0x00E5	; 0x8000e5 <INT2_Fptr>
+     daa:	f0 91 e6 00 	lds	r31, 0x00E6	; 0x8000e6 <INT2_Fptr+0x1>
      dae:	30 97       	sbiw	r30, 0x00	; 0
      db0:	09 f0       	breq	.+2      	; 0xdb4 <__vector_3+0x30>
 	{
@@ -2442,22 +2448,22 @@ void waveGen()
      dda:	86 e0       	ldi	r24, 0x06	; 6
      ddc:	82 bf       	out	0x32, r24	; 50
 	OV++;
-     dde:	80 91 e9 00 	lds	r24, 0x00E9	; 0x8000e9 <OV.2039>
-     de2:	90 91 ea 00 	lds	r25, 0x00EA	; 0x8000ea <OV.2039+0x1>
-     de6:	a0 91 eb 00 	lds	r26, 0x00EB	; 0x8000eb <OV.2039+0x2>
-     dea:	b0 91 ec 00 	lds	r27, 0x00EC	; 0x8000ec <OV.2039+0x3>
+     dde:	80 91 eb 00 	lds	r24, 0x00EB	; 0x8000eb <OV.2040>
+     de2:	90 91 ec 00 	lds	r25, 0x00EC	; 0x8000ec <OV.2040+0x1>
+     de6:	a0 91 ed 00 	lds	r26, 0x00ED	; 0x8000ed <OV.2040+0x2>
+     dea:	b0 91 ee 00 	lds	r27, 0x00EE	; 0x8000ee <OV.2040+0x3>
      dee:	01 96       	adiw	r24, 0x01	; 1
      df0:	a1 1d       	adc	r26, r1
      df2:	b1 1d       	adc	r27, r1
-     df4:	80 93 e9 00 	sts	0x00E9, r24	; 0x8000e9 <OV.2039>
-     df8:	90 93 ea 00 	sts	0x00EA, r25	; 0x8000ea <OV.2039+0x1>
-     dfc:	a0 93 eb 00 	sts	0x00EB, r26	; 0x8000eb <OV.2039+0x2>
-     e00:	b0 93 ec 00 	sts	0x00EC, r27	; 0x8000ec <OV.2039+0x3>
+     df4:	80 93 eb 00 	sts	0x00EB, r24	; 0x8000eb <OV.2040>
+     df8:	90 93 ec 00 	sts	0x00EC, r25	; 0x8000ec <OV.2040+0x1>
+     dfc:	a0 93 ed 00 	sts	0x00ED, r26	; 0x8000ed <OV.2040+0x2>
+     e00:	b0 93 ee 00 	sts	0x00EE, r27	; 0x8000ee <OV.2040+0x3>
 	if (OV==(u32_OFFTicks+1))
-     e04:	00 91 ed 00 	lds	r16, 0x00ED	; 0x8000ed <u32_OFFTicks>
-     e08:	10 91 ee 00 	lds	r17, 0x00EE	; 0x8000ee <u32_OFFTicks+0x1>
-     e0c:	20 91 ef 00 	lds	r18, 0x00EF	; 0x8000ef <u32_OFFTicks+0x2>
-     e10:	30 91 f0 00 	lds	r19, 0x00F0	; 0x8000f0 <u32_OFFTicks+0x3>
+     e04:	00 91 ef 00 	lds	r16, 0x00EF	; 0x8000ef <u32_OFFTicks>
+     e08:	10 91 f0 00 	lds	r17, 0x00F0	; 0x8000f0 <u32_OFFTicks+0x1>
+     e0c:	20 91 f1 00 	lds	r18, 0x00F1	; 0x8000f1 <u32_OFFTicks+0x2>
+     e10:	30 91 f2 00 	lds	r19, 0x00F2	; 0x8000f2 <u32_OFFTicks+0x3>
      e14:	b9 01       	movw	r22, r18
      e16:	a8 01       	movw	r20, r16
      e18:	4f 5f       	subi	r20, 0xFF	; 255
@@ -2477,10 +2483,10 @@ void waveGen()
      e32:	21 c0       	rjmp	.+66     	; 0xe76 <waveGen+0xa0>
 	}
 	else if (OV==(u32_ONTicks+u32_OFFTicks+2))
-     e34:	40 91 f1 00 	lds	r20, 0x00F1	; 0x8000f1 <u32_ONTicks>
-     e38:	50 91 f2 00 	lds	r21, 0x00F2	; 0x8000f2 <u32_ONTicks+0x1>
-     e3c:	60 91 f3 00 	lds	r22, 0x00F3	; 0x8000f3 <u32_ONTicks+0x2>
-     e40:	70 91 f4 00 	lds	r23, 0x00F4	; 0x8000f4 <u32_ONTicks+0x3>
+     e34:	40 91 f3 00 	lds	r20, 0x00F3	; 0x8000f3 <u32_ONTicks>
+     e38:	50 91 f4 00 	lds	r21, 0x00F4	; 0x8000f4 <u32_ONTicks+0x1>
+     e3c:	60 91 f5 00 	lds	r22, 0x00F5	; 0x8000f5 <u32_ONTicks+0x2>
+     e40:	70 91 f6 00 	lds	r23, 0x00F6	; 0x8000f6 <u32_ONTicks+0x3>
      e44:	40 0f       	add	r20, r16
      e46:	51 1f       	adc	r21, r17
      e48:	62 1f       	adc	r22, r18
@@ -2500,10 +2506,10 @@ void waveGen()
      e60:	88 e0       	ldi	r24, 0x08	; 8
      e62:	0e 94 54 05 	call	0xaa8	; 0xaa8 <DIO_writepin>
 		OV=0;
-     e66:	10 92 e9 00 	sts	0x00E9, r1	; 0x8000e9 <OV.2039>
-     e6a:	10 92 ea 00 	sts	0x00EA, r1	; 0x8000ea <OV.2039+0x1>
-     e6e:	10 92 eb 00 	sts	0x00EB, r1	; 0x8000eb <OV.2039+0x2>
-     e72:	10 92 ec 00 	sts	0x00EC, r1	; 0x8000ec <OV.2039+0x3>
+     e66:	10 92 eb 00 	sts	0x00EB, r1	; 0x8000eb <OV.2040>
+     e6a:	10 92 ec 00 	sts	0x00EC, r1	; 0x8000ec <OV.2040+0x1>
+     e6e:	10 92 ed 00 	sts	0x00ED, r1	; 0x8000ed <OV.2040+0x2>
+     e72:	10 92 ee 00 	sts	0x00EE, r1	; 0x8000ee <OV.2040+0x3>
 	}
 	
 }
@@ -2605,10 +2611,10 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
      f12:	b6 01       	movw	r22, r12
      f14:	0e 94 3f 0a 	call	0x147e	; 0x147e <__divsf3>
      f18:	0e 94 b1 0a 	call	0x1562	; 0x1562 <__fixunssfsi>
-     f1c:	60 93 f1 00 	sts	0x00F1, r22	; 0x8000f1 <u32_ONTicks>
-     f20:	70 93 f2 00 	sts	0x00F2, r23	; 0x8000f2 <u32_ONTicks+0x1>
-     f24:	80 93 f3 00 	sts	0x00F3, r24	; 0x8000f3 <u32_ONTicks+0x2>
-     f28:	90 93 f4 00 	sts	0x00F4, r25	; 0x8000f4 <u32_ONTicks+0x3>
+     f1c:	60 93 f3 00 	sts	0x00F3, r22	; 0x8000f3 <u32_ONTicks>
+     f20:	70 93 f4 00 	sts	0x00F4, r23	; 0x8000f4 <u32_ONTicks+0x1>
+     f24:	80 93 f5 00 	sts	0x00F5, r24	; 0x8000f5 <u32_ONTicks+0x2>
+     f28:	90 93 f6 00 	sts	0x00F6, r25	; 0x8000f6 <u32_ONTicks+0x3>
 	u32_OFFTicks    =  f64_waveOFFTime/(f64_max_time-6);
      f2c:	20 e0       	ldi	r18, 0x00	; 0
      f2e:	30 e0       	ldi	r19, 0x00	; 0
@@ -2618,10 +2624,10 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
      f36:	b4 01       	movw	r22, r8
      f38:	0e 94 3f 0a 	call	0x147e	; 0x147e <__divsf3>
      f3c:	0e 94 b1 0a 	call	0x1562	; 0x1562 <__fixunssfsi>
-     f40:	60 93 ed 00 	sts	0x00ED, r22	; 0x8000ed <u32_OFFTicks>
-     f44:	70 93 ee 00 	sts	0x00EE, r23	; 0x8000ee <u32_OFFTicks+0x1>
-     f48:	80 93 ef 00 	sts	0x00EF, r24	; 0x8000ef <u32_OFFTicks+0x2>
-     f4c:	90 93 f0 00 	sts	0x00F0, r25	; 0x8000f0 <u32_OFFTicks+0x3>
+     f40:	60 93 ef 00 	sts	0x00EF, r22	; 0x8000ef <u32_OFFTicks>
+     f44:	70 93 f0 00 	sts	0x00F0, r23	; 0x8000f0 <u32_OFFTicks+0x1>
+     f48:	80 93 f1 00 	sts	0x00F1, r24	; 0x8000f1 <u32_OFFTicks+0x2>
+     f4c:	90 93 f2 00 	sts	0x00F2, r25	; 0x8000f2 <u32_OFFTicks+0x3>
 	DIO_writepin(PINB0,HIGH);
      f50:	61 e0       	ldi	r22, 0x01	; 1
      f52:	88 e0       	ldi	r24, 0x08	; 8
@@ -2697,8 +2703,8 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
      fca:	08 95       	ret
 
 00000fcc <TIMER0_OV_SetCallBack>:
-     fcc:	90 93 06 01 	sts	0x0106, r25	; 0x800106 <Timer0_OVF_Fptr+0x1>
-     fd0:	80 93 05 01 	sts	0x0105, r24	; 0x800105 <Timer0_OVF_Fptr>
+     fcc:	90 93 07 01 	sts	0x0107, r25	; 0x800107 <Timer0_OVF_Fptr+0x1>
+     fd0:	80 93 06 01 	sts	0x0106, r24	; 0x800106 <Timer0_OVF_Fptr>
      fd4:	08 95       	ret
 
 00000fd6 <__vector_11>:
@@ -2719,8 +2725,8 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
      ff2:	bf 93       	push	r27
      ff4:	ef 93       	push	r30
      ff6:	ff 93       	push	r31
-     ff8:	e0 91 05 01 	lds	r30, 0x0105	; 0x800105 <Timer0_OVF_Fptr>
-     ffc:	f0 91 06 01 	lds	r31, 0x0106	; 0x800106 <Timer0_OVF_Fptr+0x1>
+     ff8:	e0 91 06 01 	lds	r30, 0x0106	; 0x800106 <Timer0_OVF_Fptr>
+     ffc:	f0 91 07 01 	lds	r31, 0x0107	; 0x800107 <Timer0_OVF_Fptr+0x1>
     1000:	30 97       	sbiw	r30, 0x00	; 0
     1002:	09 f0       	breq	.+2      	; 0x1006 <__vector_11+0x30>
     1004:	09 95       	icall
@@ -2852,8 +2858,8 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
     10f4:	bf 93       	push	r27
     10f6:	ef 93       	push	r30
     10f8:	ff 93       	push	r31
-    10fa:	e0 91 03 01 	lds	r30, 0x0103	; 0x800103 <Timer1_OVF_Fptr>
-    10fe:	f0 91 04 01 	lds	r31, 0x0104	; 0x800104 <Timer1_OVF_Fptr+0x1>
+    10fa:	e0 91 04 01 	lds	r30, 0x0104	; 0x800104 <Timer1_OVF_Fptr>
+    10fe:	f0 91 05 01 	lds	r31, 0x0105	; 0x800105 <Timer1_OVF_Fptr+0x1>
     1102:	30 97       	sbiw	r30, 0x00	; 0
     1104:	09 f0       	breq	.+2      	; 0x1108 <__vector_9+0x30>
     1106:	09 95       	icall
@@ -2893,8 +2899,8 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
     1146:	bf 93       	push	r27
     1148:	ef 93       	push	r30
     114a:	ff 93       	push	r31
-    114c:	e0 91 01 01 	lds	r30, 0x0101	; 0x800101 <Timer1_OCB_Fptr>
-    1150:	f0 91 02 01 	lds	r31, 0x0102	; 0x800102 <Timer1_OCB_Fptr+0x1>
+    114c:	e0 91 02 01 	lds	r30, 0x0102	; 0x800102 <Timer1_OCB_Fptr>
+    1150:	f0 91 03 01 	lds	r31, 0x0103	; 0x800103 <Timer1_OCB_Fptr+0x1>
     1154:	30 97       	sbiw	r30, 0x00	; 0
     1156:	09 f0       	breq	.+2      	; 0x115a <__vector_8+0x30>
     1158:	09 95       	icall
@@ -2934,8 +2940,8 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
     1198:	bf 93       	push	r27
     119a:	ef 93       	push	r30
     119c:	ff 93       	push	r31
-    119e:	e0 91 ff 00 	lds	r30, 0x00FF	; 0x8000ff <Timer1_ICU_Fptr>
-    11a2:	f0 91 00 01 	lds	r31, 0x0100	; 0x800100 <Timer1_ICU_Fptr+0x1>
+    119e:	e0 91 00 01 	lds	r30, 0x0100	; 0x800100 <Timer1_ICU_Fptr>
+    11a2:	f0 91 01 01 	lds	r31, 0x0101	; 0x800101 <Timer1_ICU_Fptr+0x1>
     11a6:	30 97       	sbiw	r30, 0x00	; 0
     11a8:	09 f0       	breq	.+2      	; 0x11ac <__vector_6+0x30>
     11aa:	09 95       	icall
@@ -3139,21 +3145,21 @@ ISR(TIMER2_OV_vect)
     130a:	9f 93       	push	r25
     130c:	af 93       	push	r26
     130e:	bf 93       	push	r27
-	if(car_flag == 1)
-    1310:	80 91 f5 00 	lds	r24, 0x00F5	; 0x8000f5 <car_flag>
+	if(g_speed_flag == 1)
+    1310:	80 91 62 00 	lds	r24, 0x0062	; 0x800062 <g_speed_flag>
     1314:	81 30       	cpi	r24, 0x01	; 1
     1316:	c9 f5       	brne	.+114    	; 0x138a <__vector_5+0x94>
 	{
 		
 		if (ovf < mode_ovf ){
-    1318:	80 91 f6 00 	lds	r24, 0x00F6	; 0x8000f6 <ovf>
-    131c:	90 91 f7 00 	lds	r25, 0x00F7	; 0x8000f7 <ovf+0x1>
-    1320:	a0 91 f8 00 	lds	r26, 0x00F8	; 0x8000f8 <ovf+0x2>
-    1324:	b0 91 f9 00 	lds	r27, 0x00F9	; 0x8000f9 <ovf+0x3>
-    1328:	40 91 fa 00 	lds	r20, 0x00FA	; 0x8000fa <mode_ovf>
-    132c:	50 91 fb 00 	lds	r21, 0x00FB	; 0x8000fb <mode_ovf+0x1>
-    1330:	60 91 fc 00 	lds	r22, 0x00FC	; 0x8000fc <mode_ovf+0x2>
-    1334:	70 91 fd 00 	lds	r23, 0x00FD	; 0x8000fd <mode_ovf+0x3>
+    1318:	80 91 f7 00 	lds	r24, 0x00F7	; 0x8000f7 <ovf>
+    131c:	90 91 f8 00 	lds	r25, 0x00F8	; 0x8000f8 <ovf+0x1>
+    1320:	a0 91 f9 00 	lds	r26, 0x00F9	; 0x8000f9 <ovf+0x2>
+    1324:	b0 91 fa 00 	lds	r27, 0x00FA	; 0x8000fa <ovf+0x3>
+    1328:	40 91 fb 00 	lds	r20, 0x00FB	; 0x8000fb <mode_ovf>
+    132c:	50 91 fc 00 	lds	r21, 0x00FC	; 0x8000fc <mode_ovf+0x1>
+    1330:	60 91 fd 00 	lds	r22, 0x00FD	; 0x8000fd <mode_ovf+0x2>
+    1334:	70 91 fe 00 	lds	r23, 0x00FE	; 0x8000fe <mode_ovf+0x3>
     1338:	84 17       	cp	r24, r20
     133a:	95 07       	cpc	r25, r21
     133c:	a6 07       	cpc	r26, r22
@@ -3163,10 +3169,10 @@ ISR(TIMER2_OV_vect)
     1342:	01 96       	adiw	r24, 0x01	; 1
     1344:	a1 1d       	adc	r26, r1
     1346:	b1 1d       	adc	r27, r1
-    1348:	80 93 f6 00 	sts	0x00F6, r24	; 0x8000f6 <ovf>
-    134c:	90 93 f7 00 	sts	0x00F7, r25	; 0x8000f7 <ovf+0x1>
-    1350:	a0 93 f8 00 	sts	0x00F8, r26	; 0x8000f8 <ovf+0x2>
-    1354:	b0 93 f9 00 	sts	0x00F9, r27	; 0x8000f9 <ovf+0x3>
+    1348:	80 93 f7 00 	sts	0x00F7, r24	; 0x8000f7 <ovf>
+    134c:	90 93 f8 00 	sts	0x00F8, r25	; 0x8000f8 <ovf+0x1>
+    1350:	a0 93 f9 00 	sts	0x00F9, r26	; 0x8000f9 <ovf+0x2>
+    1354:	b0 93 fa 00 	sts	0x00FA, r27	; 0x8000fa <ovf+0x3>
     1358:	18 c0       	rjmp	.+48     	; 0x138a <__vector_5+0x94>
 		}
 		else if ( ovf == mode_ovf && mode_ovf!=0)
@@ -3181,18 +3187,18 @@ ISR(TIMER2_OV_vect)
     136a:	79 f0       	breq	.+30     	; 0x138a <__vector_5+0x94>
 		{
 			ovf =0 ;
-    136c:	10 92 f6 00 	sts	0x00F6, r1	; 0x8000f6 <ovf>
-    1370:	10 92 f7 00 	sts	0x00F7, r1	; 0x8000f7 <ovf+0x1>
-    1374:	10 92 f8 00 	sts	0x00F8, r1	; 0x8000f8 <ovf+0x2>
-    1378:	10 92 f9 00 	sts	0x00F9, r1	; 0x8000f9 <ovf+0x3>
+    136c:	10 92 f7 00 	sts	0x00F7, r1	; 0x8000f7 <ovf>
+    1370:	10 92 f8 00 	sts	0x00F8, r1	; 0x8000f8 <ovf+0x1>
+    1374:	10 92 f9 00 	sts	0x00F9, r1	; 0x8000f9 <ovf+0x2>
+    1378:	10 92 fa 00 	sts	0x00FA, r1	; 0x8000fa <ovf+0x3>
 			if (car_mode ==0)
-    137c:	80 91 fe 00 	lds	r24, 0x00FE	; 0x8000fe <car_mode>
+    137c:	80 91 ff 00 	lds	r24, 0x00FF	; 0x8000ff <car_mode>
     1380:	81 11       	cpse	r24, r1
     1382:	03 c0       	rjmp	.+6      	; 0x138a <__vector_5+0x94>
 			{
 				car_mode=1;	
     1384:	81 e0       	ldi	r24, 0x01	; 1
-    1386:	80 93 fe 00 	sts	0x00FE, r24	; 0x8000fe <car_mode>
+    1386:	80 93 ff 00 	sts	0x00FF, r24	; 0x8000ff <car_mode>
 			
 		}
 		

@@ -25,7 +25,7 @@ u8 car_mode = 0;
 s32 mode_ovf = 0;
 static s32 ovf = 0;
 u32 gu32_T1_OVF_TICKS;
-u8 car_flag =0  ;
+u8 g_speed_flag =1  ;
 
 void TIMER0_Init(Timer0Mode_type mode)
 {
@@ -587,7 +587,7 @@ void TIMER_2_INT(){
 
 ISR(TIMER2_OV_vect)
 {
-	if(car_flag == 1)
+	if(g_speed_flag == 1)
 	{
 		
 		if (ovf < mode_ovf ){

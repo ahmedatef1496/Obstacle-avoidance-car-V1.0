@@ -59,21 +59,27 @@ void car_Rotating()
 	{
 		Car_Rotate_Left();
 	}
+	_delay_ms(3000);
 }
 
 
 void car_Backword_30()
 {
-	LCD_Clear();
-	PWM_set_duty(30,100);
-	timer_start(TIMER0_SCALER_8);
-	Car_Moving_BWD();
-	LCD_SetCursor(0,0);
-	LCD_WriteString("Speed:30% Dir:	B");
-	LCD_SetCursor(1,0);
-	LCD_WriteString("Dist.:");
-	LCD_WriteNumber(g_distance);
-	LCD_WriteString(" Cm");
+	while (g_distance <= 20)
+	{
+		g_distance = US_getdistance();
+		LCD_Clear();
+		PWM_set_duty(30,100);
+		timer_start(TIMER0_SCALER_8);
+		Car_Moving_BWD();
+		LCD_SetCursor(0,0);
+		LCD_WriteString("Speed:30% Dir:	B");
+		LCD_SetCursor(1,0);
+		LCD_WriteString("Dist.:");
+		LCD_WriteNumber(g_distance);
+		LCD_WriteString(" Cm");
+	}
+	
 }
 
 
@@ -91,7 +97,52 @@ void Car_Stopping()
 	LCD_WriteString(" Cm");
 }
 
-
+// void startStage(void) {
+// 	u8 keyPressed = 0;
+// 	u8 buttonCounter = 0;
+// 	Button_State buttonState = 0;
+// 	/* Check the value of the key pressed
+// 	 * The vehicle won't start until key 1 is pressed. 
+// 	 */
+// 	do {
+// 		KEYPAD_getpressedkey(&keyPressed);
+// 	} while (keyPressed != '1');
+// 	
+// 	/* Key 1 is pressed. */
+// 	if (keyPressed == '1') {
+// 		LCD_WriteString("Set Def Rot");
+// 		LCD_SetCursor(1, 0);
+// 		LCD_WriteString("Right");
+// 		/* Initiate timer 2. */
+// 		//TIMER_2_init(NORMAL_MODE);
+// 		TIMER_2_INT();
+// 		/* Start timer 2. */
+// 		TIMER_2_start(PRECALER_1024);
+// 		while (overflowCount < 153) {
+// 			/* Check that state of the PB and increment if pressed. */
+// 			if (buttonState == pressed) {
+// 				buttonCounter++;
+// 				// TODO Add a delay to limit the debouncing effect if needed.
+// 			} else {
+// 				// Reset overflow counter.
+// 				overflowCount = 0;
+// 			}
+// 		}
+// 	}
+// 	/* If the PB pressed even number of times. */
+// 	if (buttonCounter % 2 == 0) {
+// 		LCD_Clear();
+// 		LCD_WriteString("Set Def. Rot.");
+// 		LCD_SetCursor(1, 0);
+// 		LCD_WriteString("Right");
+// 	} else {
+// 		LCD_Clear();
+// 		LCD_WriteString("Set Def. Rot.");
+// 		LCD_SetCursor(1, 0);
+// 		LCD_WriteString("Left");
+// 	}
+// 	
+// }
 
 void app_init()
 {
@@ -118,7 +169,8 @@ void app_start()
 		if (g_distance > 70 && car_mode == 0)
 		{
 			car_Forward_30();
-			mode_ovf = 100;
+			g_speed_flag = 1;
+			mode_ovf = 100000;
 		}
 		else if (car_mode == 1 && g_distance > 70)
 		{
@@ -126,22 +178,19 @@ void app_start()
 		}
 		else if (g_distance <= 70 && g_distance > 30)
 		{
+			car_mode = 0;
 			car_Forward_30();
 		}
 		else if (g_distance <= 30 && g_distance > 20)
 		{
 			Car_Stopping();
-			_delay_ms(4000);
+			
 			car_Rotating();
-			_delay_ms(5000);
-
 		}
 		else if (g_distance <= 20)
 		{
 			Car_Stopping();
-			_delay_ms(4000);
 			car_Backword_30();
-			_delay_ms(5000);
 		}
 	}
 }

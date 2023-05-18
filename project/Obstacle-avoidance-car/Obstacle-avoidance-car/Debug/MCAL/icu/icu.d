@@ -9,6 +9,8 @@ MCAL/icu/icu.d MCAL/icu/icu.o: ../MCAL/icu/icu.c ../MCAL/icu/icu.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util\delay_basic.h \
  c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h \
  ../MCAL/icu/../timers/../dio/../../SERVIES/std_typs.h \
+ ../MCAL/icu/../timers/../../HAL/lcd/lcd.h \
+ ../MCAL/icu/../timers/../../HAL/lcd/../../MCAL/dio/dio.h \
  ../MCAL/icu/../Interrupt/exi.h ../MCAL/icu/../Interrupt/../dio/dio.h
 
 ../MCAL/icu/icu.h:
@@ -34,6 +36,10 @@ c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\
 c:\program\ files\ (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\math.h:
 
 ../MCAL/icu/../timers/../dio/../../SERVIES/std_typs.h:
+
+../MCAL/icu/../timers/../../HAL/lcd/lcd.h:
+
+../MCAL/icu/../timers/../../HAL/lcd/../../MCAL/dio/dio.h:
 
 ../MCAL/icu/../Interrupt/exi.h:
 
