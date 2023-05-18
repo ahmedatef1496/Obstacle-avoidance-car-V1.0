@@ -15,6 +15,8 @@
 #include "../HAL/lcd/lcd.h"
 #include "../HAL/motor/motor.h"
 #include "../MCAL/dio/dio.h"
+#include "../HAL/ultrasonic/us.h"
+#include <util/delay.h>
 
 
 void app_init();

@@ -14,6 +14,8 @@ HAL\motor\motor.c
 
 HAL\ultrasonic\ultrasonic.c
 
+HAL\ultrasonic\us.c
+
 main.c
 
 MCAL\dio\dio.c

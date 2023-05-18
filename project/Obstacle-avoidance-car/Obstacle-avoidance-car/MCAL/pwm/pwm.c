@@ -45,10 +45,7 @@ void PWM_set_duty(u8 u8_DutyCycle,u32 u32_Freq)
 	f64 f64_max_time = (256*f64_oneTickTime); //256u
 	//LCD_WriteNumber( f64_max_time) ;
 	u32_ONTicks     =  f64_waveONTime/(f64_max_time-6);
-	LCD_WriteNumber(u32_ONTicks) ;
 	u32_OFFTicks    =  f64_waveOFFTime/(f64_max_time-6);
-	LCD_SetCursor(1,0);
-	LCD_WriteNumber(u32_OFFTicks) ;
 	DIO_writepin(PINB0,HIGH);
 }
 

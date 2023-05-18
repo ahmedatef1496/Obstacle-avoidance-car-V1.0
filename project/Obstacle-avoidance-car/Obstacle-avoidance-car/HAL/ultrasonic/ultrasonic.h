@@ -11,7 +11,9 @@
 
 #include "../../MCAL/dio/dio.h"
 #include "../../MCAL/timers/timer.h"
+#include "../../MCAL/Interrupt/exi.h"
 
-
+u8 flag;
+u16 t1, t2;
 
 #endif /* ULTRASONIC_H_ */

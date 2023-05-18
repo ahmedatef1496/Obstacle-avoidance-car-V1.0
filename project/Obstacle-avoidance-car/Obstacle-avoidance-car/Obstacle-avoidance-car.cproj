@@ -165,6 +165,12 @@
     <Compile Include="HAL\ultrasonic\ultrasonic.h">
       <SubType>compile</SubType>
     </Compile>
+    <Compile Include="HAL\ultrasonic\us.c">
+      <SubType>compile</SubType>
+    </Compile>
+    <Compile Include="HAL\ultrasonic\us.h">
+      <SubType>compile</SubType>
+    </Compile>
     <Compile Include="main.c">
       <SubType>compile</SubType>
     </Compile>

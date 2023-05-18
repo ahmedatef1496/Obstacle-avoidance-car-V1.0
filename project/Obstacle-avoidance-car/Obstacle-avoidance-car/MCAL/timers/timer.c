@@ -585,25 +585,29 @@ void TIMER_2_INT(){
 
 
 
-ISR(TIMER2_OV_vect){
-	if(car_flag == 1){
+ISR(TIMER2_OV_vect)
+{
+	if(car_flag == 1)
+	{
 		
 		if (ovf < mode_ovf ){
 			ovf++;
 		}
-		else if ( ovf == mode_ovf && mode_ovf!=0){
+		else if ( ovf == mode_ovf && mode_ovf!=0)
+		{
 			ovf =0 ;
-			
-			if (car_mode < 8)
+			if (car_mode ==0)
 			{
-				car_mode++;
-				
-				}else{
-				car_mode = 1 ;
+				car_mode=1;	
+			}
+			else
+			{
+				car_mode == 0;
 			}
 			
 		}
 		
+		
 	}
-	
 }
+	

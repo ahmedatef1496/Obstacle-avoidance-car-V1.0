@@ -11,7 +11,6 @@ int main(void)
 {   
 	
 	 app_init();
-	 pwm_test();
 
     while (1) 
     {
