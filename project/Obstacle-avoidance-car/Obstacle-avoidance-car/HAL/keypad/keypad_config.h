@@ -24,9 +24,9 @@ typedef enum KEYPAD_readError
 #define COL_3		PIND2
 
 /******** Rows Definition *********/
-#define ROW_1		PIND3
-#define ROW_2		PIND4
-#define ROW_3		PIND5
+#define ROW_1		PINA4
+#define ROW_2		PINA5
+#define ROW_3		PINA6
 
 /******** Buttons Definition ********/
 #define BUTTON1    '1'

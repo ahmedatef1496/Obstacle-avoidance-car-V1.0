@@ -601,17 +601,15 @@ EN_timerError_t timer2_start(Timer2Scaler_type scaler)
 
 
 
-// void TIMER_2_DELAY_MS(double time_ms){
-// 	double ovfNum2  ;
-// 	double t2 ;
-// 	t2 = time_ms/1000 ;
-// 	ovfNum2 = ceil (t2 / 0.000256) ;
-// 	TIMER_2_init(NORMAL_MODE);
-// 	TIMER_2_setIntialValue(0);
-// 	TIMER_2_start(PRECALER_1);
-// 	TIMER_2_OvfNum(ovfNum2);
-// 	
-// }
+void TIMER_2_DELAY_MS(double time_ms){
+	double ovfNum2  ;
+	double t2 ;
+	t2 = time_ms/1000 ;
+	ovfNum2 = ceil (t2 / 0.000256) ;
+	TIMER_2_setIntialValue(0);
+	TIMER_2_OvfNum(ovfNum2);
+	
+}
 
 
 
