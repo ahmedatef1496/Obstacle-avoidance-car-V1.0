@@ -133,6 +133,7 @@ void startStage(void)
 	LCD_WriteString("Right");
 	
 	mode_ovf = 100000;								//starts 5 seconds timer in ISR
+	g_speed_flag = 1;
 	
 	while (car_mode == 0)
 	{
@@ -160,6 +161,7 @@ void startStage(void)
 	g_start_Flag = 1;
 	car_mode =0;
 	mode_ovf =0;
+	g_speed_flag=0;
 }
 
 
