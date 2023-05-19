@@ -7,7 +7,7 @@
 #include "app.h"
 
 volatile u16 g_distance;
-u8 g_counter=4, g_start_Flag=1;
+u8 g_counter=4, g_start_Flag=1, lcdFlag = 0, lcdFlag2 = 0;
 s32 ovf;
 
 
@@ -120,7 +120,7 @@ void Speed_50_check()
 void startStage(void) 
 {
     u8 keyPressed = 0;								//Used to store the value of the key pressed 
-	u8 buttonCounter = 0;
+	volatile u8 buttonCounter = 0;
 	Button_State buttonState = 0;
 
 
@@ -132,29 +132,36 @@ void startStage(void)
 	LCD_SetCursor(1, 0);
 	LCD_WriteString("Right");
 	
-	mode_ovf = 100000;								//starts 5 seconds timer in ISR
+	mode_ovf = 200000;								//starts 5 seconds timer in ISR
 	g_speed_flag = 1;
 	
 	while (car_mode == 0)
 	{
-		buttonState = Is_pressed(BUTTON_PIN, &buttonState);
+		Is_pressed(BUTTON_PIN, &buttonState);
 			if (buttonState == pressed)
 			{
-				buttonCounter++;					//if button is pressed, increase counter
+				buttonCounter++;
+				while (buttonState == pressed) {
+					Is_pressed(BUTTON_PIN, &buttonState);
+				}
 			}
-			if (buttonCounter % 2 == 0)
+			if ( (buttonCounter % 2 == 0 || buttonCounter == 0) && lcdFlag == 0 )
 			{
 				LCD_Clear();
 				LCD_WriteString("Set Def. Rot.");
 				LCD_SetCursor(1, 0);
 				LCD_WriteString("Right");
+				lcdFlag = 1;
+				lcdFlag2 = 0;
 			} 
-			else 
+			else if (lcdFlag2 == 0 && buttonCounter % 2 != 0)
 				{
 					LCD_Clear();
 					LCD_WriteString("Set Def. Rot.");
 					LCD_SetCursor(1, 0);
 					LCD_WriteString("Left");
+					lcdFlag2 = 1;
+					lcdFlag = 0;
 				}
 	}
 	_delay_ms(2000);
@@ -175,7 +182,8 @@ void app_init()
 	LCD_Init();
 	KEYPAD_init();
 	DIO_initpin(PIND6,INPULL);
-	DIO_Init_All();	US_init();
+	DIO_Init_All();
+	US_init();
 	TIMER_2_INT();
 	TIMER2_OV_SetCallBack(Speed_50_check);
 }
