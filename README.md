@@ -7,7 +7,7 @@
   <p align="center">
    Description Description Description
     <br />
-    <a href=""><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/blob/main/documentation/Obstacle%20Avoidance%20Robot%20V1.0%20Design%20-%20team2.pdf"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
