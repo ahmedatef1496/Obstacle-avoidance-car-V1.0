@@ -7,16 +7,31 @@
 #include "app.h"
 
 volatile u16 g_distance;
-u8 g_counter=4, g_start_Flag=1, lcdFlag = 0, lcdFlag2 = 0;
-s32 ovf;
+u8 g_start_Flag=1, lcdFlag = 0, lcdFlag2 = 0;
+static u8 g_keyPressed = 0;								//Used to store the value of the key pressed 
+volatile u8 g_buttonCounter = 0;
+static u32 ovf =0;
+static u8 g_Rotate_Counter;
 
 
+void STOP_check (void)
+{
+	KEYPAD_getpressedkey(&g_keyPressed);
+	if (g_keyPressed == '2')
+	{
+		LCD_Clear();
+		LCD_SetCursor(0,4);
+		LCD_WriteString("STOPPED!");
+		Car_Stop();
+		do {
+			KEYPAD_getpressedkey(&g_keyPressed);
+		} while (g_keyPressed != '1');				//Key 1 is pressed.
+	}
+}
 
 void car_Forward_30()
 {	
-	LCD_Clear();
 	PWM_set_duty(30,100);
-	timer_start(TIMER0_SCALER_8);
 	Car_Moving_FWD();
 	LCD_SetCursor(0,0);
 	LCD_WriteString("Speed:30% Dir:	F");
@@ -28,9 +43,7 @@ void car_Forward_30()
 
 void car_Forward_50()
 {
-	LCD_Clear();
 	PWM_set_duty(50,100);
-	timer_start(TIMER0_SCALER_8);
 	Car_Moving_FWD();
 	LCD_SetCursor(0,0);
 	LCD_WriteString("Speed:50% Dir:	F");
@@ -41,17 +54,20 @@ void car_Forward_50()
 }
 
 void car_Rotating()
-{
-		LCD_Clear();
+{	
+	while (car_mode == 0 && (g_distance <= 30 && g_distance > 20))
+	{
+		
+		US_getdistance(&g_distance);
+		STOP_check ();
 		PWM_set_duty(30,100);
-		timer_start(TIMER0_SCALER_8);
 		LCD_SetCursor(0,0);
 		LCD_WriteString("Speed:30% Dir:	R");
 		LCD_SetCursor(1,0);
 		LCD_WriteString("Dist.:");
 		LCD_WriteNumber(g_distance);
 		LCD_WriteString(" Cm");
-		if (g_counter %2 == 0)
+		if (g_buttonCounter %2 == 0)
 		{
 			Car_Rotate_Right();
 		}
@@ -59,17 +75,16 @@ void car_Rotating()
 		{
 			Car_Rotate_Left();
 		}
-		_delay_ms(3000);
+	}
 }
 
 void car_Backword_30()
 {
 	while (g_distance <= 20)
 	{
+		STOP_check();
 		US_getdistance(&g_distance);
-		LCD_Clear();
 		PWM_set_duty(30,100);
-		timer_start(TIMER0_SCALER_8);
 		Car_Moving_BWD();
 		LCD_SetCursor(0,0);
 		LCD_WriteString("Speed:30% Dir:	B");
@@ -81,12 +96,9 @@ void car_Backword_30()
 	
 }
 
-
 void Car_Stopping()
 {
-	LCD_Clear();
 	PWM_set_duty(0,100);
-	timer_start(TIMER0_SCALER_8);
 	Car_Stop();
 	LCD_SetCursor(0,0);
 	LCD_WriteString("Speed:00% Dir:	S");
@@ -94,7 +106,6 @@ void Car_Stopping()
 	LCD_WriteString("Dist.:");
 	LCD_WriteNumber(g_distance);
 	LCD_WriteString(" Cm");
-	_delay_ms(1000);
 }
 
 void Speed_50_check()
@@ -118,21 +129,21 @@ void Speed_50_check()
 }
 
 void startStage(void) 
-{
-    u8 keyPressed = 0;								//Used to store the value of the key pressed 
-	volatile u8 buttonCounter = 0;
+{	
 	Button_State buttonState = 0;
 
 
 	do {							
-		KEYPAD_getpressedkey(&keyPressed);
-		} while (keyPressed != '1');				//Key 1 is pressed. 
+		KEYPAD_getpressedkey(&g_keyPressed);
+		} while (g_keyPressed != '1');				//Key 1 is pressed. 
 	
+	LCD_SetCursor(0, 0);
 	LCD_WriteString("Set Def Rot");
 	LCD_SetCursor(1, 0);
 	LCD_WriteString("Right");
 	
-	mode_ovf = 200000;								//starts 5 seconds timer in ISR
+	ovf = 0;
+	mode_ovf = 156250;								//starts 5 seconds timer in ISR
 	g_speed_flag = 1;
 	
 	while (car_mode == 0)
@@ -140,36 +151,38 @@ void startStage(void)
 		Is_pressed(BUTTON_PIN, &buttonState);
 			if (buttonState == pressed)
 			{
-				buttonCounter++;
+				g_buttonCounter++;
 				while (buttonState == pressed) {
 					Is_pressed(BUTTON_PIN, &buttonState);
 				}
 			}
-			if ( (buttonCounter % 2 == 0 || buttonCounter == 0) && lcdFlag == 0 )
+			if ( (g_buttonCounter % 2 == 0 || g_buttonCounter == 0) && lcdFlag == 0 )
 			{
-				LCD_Clear();
+				LCD_SetCursor(0, 0);
 				LCD_WriteString("Set Def. Rot.");
 				LCD_SetCursor(1, 0);
 				LCD_WriteString("Right");
 				lcdFlag = 1;
 				lcdFlag2 = 0;
 			} 
-			else if (lcdFlag2 == 0 && buttonCounter % 2 != 0)
+			else if (lcdFlag2 == 0 && g_buttonCounter % 2 != 0)
 				{
-					LCD_Clear();
+					LCD_SetCursor(0, 0);
 					LCD_WriteString("Set Def. Rot.");
 					LCD_SetCursor(1, 0);
-					LCD_WriteString("Left");
+					LCD_WriteString("Left ");
 					lcdFlag2 = 1;
 					lcdFlag = 0;
 				}
 	}
-	_delay_ms(2000);
+	_delay_ms(1000);
 	g_start_Flag = 1;
 	car_mode =0;
 	mode_ovf =0;
 	g_speed_flag=0;
+	ovf = 0;
 }
+
 
 
 void app_init()
@@ -190,17 +203,19 @@ void app_init()
 
 void app_start()
 {
+	
 	startStage();
 	
 	
 	while (g_start_Flag)
 	{
+		STOP_check ();
 		US_getdistance(&g_distance);
 		if (g_distance > 70 && car_mode == 0)
 		{
 			car_Forward_30();
 			g_speed_flag = 1;
-			mode_ovf = 100000;
+			mode_ovf = 156250;								//starts 5 sec. timer to increase the speed
 		}
 		else if (car_mode == 1 && g_distance > 70)
 		{
@@ -210,13 +225,41 @@ void app_start()
 		{
 			car_mode = 0;
 			mode_ovf=0;
+			ovf = 0;
+			g_speed_flag =0;
 			car_Forward_30();
 		}
 		else if (g_distance <= 30 && g_distance > 20)
 		{
 			Car_Stopping();
+			g_speed_flag = 1;
+			ovf = 0;
+			mode_ovf = 62500;								//starts 2 sec. timer for 90 degree representation
+					
 			car_Rotating();
+						
+			car_mode = 0;
+			mode_ovf = 0;
+			g_speed_flag = 0;
+			g_Rotate_Counter++;
+			if (g_Rotate_Counter == 4)
+			{
+				while (g_distance <= 30 && g_distance > 20)
+				{
+					US_getdistance(&g_distance);
+					PWM_set_duty(0,100);
+					Car_Stop();
+					LCD_SetCursor(0,0);
+					LCD_WriteString("Speed:00% Dir:	S");
+					LCD_SetCursor(1,0);
+					LCD_WriteString("Dist.:");
+					LCD_WriteNumber(g_distance);
+					LCD_WriteString(" Cm");
+				}
+				
+			}
 		}
+		
 		else if (g_distance <= 20)
 		{
 			Car_Stopping();
