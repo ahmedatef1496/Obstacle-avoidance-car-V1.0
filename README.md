@@ -10,7 +10,7 @@
 | File                  | Link                                                                           
 | --------------------- | ------------------------------------------------------------------------------ |
 | Project hex file             | [car.hex](https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/blob/main/project/Obstacle-avoidance-car/Obstacle-avoidance-car/Debug/Obstacle-avoidance-car.hex)  |                                       
-| documentation               | [.dox](https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/tree/main/documentation) |                                          | 
+| documentation               | [files](https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/tree/main/documentation) |                                          | 
 | Simulation            | [Simulation](https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/tree/main/simulation) |
 | Project Video                 | [video](https://drive.google.com/file/d/1TTvfqWUVuY80Wet801XQi8lQTfkVMYcd/view?usp=sharing)|
 
