@@ -1,7 +1,7 @@
 # Obstacle-avoidance-car-V1.0
   <div align="center">
   <a href="">
-    <img src="https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/blob/main/documentation/car.jpg" alt="Logo" width="200" height="200">
+    <img src="https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/blob/main/documentation/car.jpg" alt="Logo" width="600" height="200">
   </a>
 <h3 align="center">Simple ATM Machine</h3>
   <p align="center">
