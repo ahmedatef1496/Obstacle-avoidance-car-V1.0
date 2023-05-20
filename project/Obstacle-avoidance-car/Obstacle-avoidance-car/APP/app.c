@@ -133,14 +133,18 @@ void startStage(void)
 	Button_State buttonState = 0;
 
 
-	do {							
+	do {
+		LCD_SetCursor(0,4);
+		LCD_WriteString("WELCOME!");
+		LCD_SetCursor(1, 0);
+		LCD_WriteString("press 1 to start");				
 		KEYPAD_getpressedkey(&g_keyPressed);
 		} while (g_keyPressed != '1');				//Key 1 is pressed. 
 	
 	LCD_SetCursor(0, 0);
-	LCD_WriteString("Set Def Rot");
+	LCD_WriteString("Set Def Rot     ");
 	LCD_SetCursor(1, 0);
-	LCD_WriteString("Right");
+	LCD_WriteString("Right           ");
 	
 	ovf = 0;
 	mode_ovf = 156250;								//starts 5 seconds timer in ISR
@@ -248,14 +252,7 @@ void app_start()
 				while (g_distance <= 30 && g_distance > 20)
 				{
 					US_getdistance(&g_distance);
-					PWM_set_duty(0,100);
-					Car_Stop();
-					LCD_SetCursor(0,0);
-					LCD_WriteString("Speed:00% Dir:	S");
-					LCD_SetCursor(1,0);
-					LCD_WriteString("Dist.:");
-					LCD_WriteNumber(g_distance);
-					LCD_WriteString(" Cm");
+					Car_Stopping();
 				}
 				
 			}
