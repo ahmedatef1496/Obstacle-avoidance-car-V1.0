@@ -14,6 +14,7 @@
 #include "../../HAL/lcd/lcd.h"
 
 #define TIMR0_MAX_VALUE		256
+#define TIMR1_MAX_VALUE		256
 #define TIMR2_MAX_VALUE		256
 extern   u8 car_mode ;
 extern   s32 mode_ovf ;
@@ -51,7 +52,7 @@ extern   u8 g_speed_flag;
 #define TOIE1   2
 #define OCIE0   1
 #define TOIE0   0
-
+/*================================================================================================================*/
 typedef enum {
 	INVALID_PRESCALER,
 	INVALID_MODE,
@@ -186,23 +187,6 @@ void Timer1_ICU_SetCallBack(void(*LocalFptr)(void));
 
 void timer1_ReadCounts(u16 *pu16_timer1Counts);
 void timer1_setTimerValue(u8 timerValue);
-
-// typedef enum {
-// 	NORMAL_MODE,
-// 	FAST_PWM,
-// 	CTC,
-// 	PWM_PHASE_CORRECT	
-// }Timer2Mode_type; 
-
-// typedef enum{
-// 	PRECALER_1,
-// 	PRECALER_8,
-// 	PRECALER_64,
-// 	PRECALER_32, 
-// 	PRECALER_128, 
-// 	PRECALER_256,
-// 	PRECALER_1024,
-// }Timer2Scaler_type;
 
 typedef enum
 {
