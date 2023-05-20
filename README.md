@@ -1,5 +1,17 @@
 # Obstacle-avoidance-car-V1.0
-  
+  <div align="center">
+  <a href="">
+    <img src="https://github.com/ahmedatef1496/Obstacle-avoidance-car-V1.0/blob/main/documentation/car.jpg" alt="Logo" width="200" height="200">
+  </a>
+<h3 align="center">Simple ATM Machine</h3>
+  <p align="center">
+   Description Description Description
+    <br />
+    <a href=""><strong>Explore the docs »</strong></a>
+    <br />
+    <br />
+  </p>
+  </div>
 # Team Members
 >  - [![AhmedAtef   ](https://img.shields.io/static/v1?label=&message=AhmedAtef&color=000605&logo=github&logoColor=FFFFFF&labelColor=000605)](https://github.com/ahmedatef1496)
 >  - [![AmrGamal    ](https://img.shields.io/static/v1?label=&message=AmrGamal&color=000605&logo=github&logoColor=FFFFFF&labelColor=000605)](https://github.com/AmrElAbd09)
