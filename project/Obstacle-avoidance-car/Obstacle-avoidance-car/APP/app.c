@@ -227,6 +227,7 @@ void app_start()
 			mode_ovf=0;
 			ovf = 0;
 			g_speed_flag =0;
+			g_Rotate_Counter = 0;
 			car_Forward_30();
 		}
 		else if (g_distance <= 30 && g_distance > 20)
@@ -234,7 +235,7 @@ void app_start()
 			Car_Stopping();
 			g_speed_flag = 1;
 			ovf = 0;
-			mode_ovf = 62500;								//starts 2 sec. timer for 90 degree representation
+			mode_ovf = 62500;								//starts timer for 90 degree rotation
 					
 			car_Rotating();
 						
@@ -262,6 +263,7 @@ void app_start()
 		
 		else if (g_distance <= 20)
 		{
+			g_Rotate_Counter = 0;
 			Car_Stopping();
 			car_Backword_30();
 		}
