@@ -122,7 +122,7 @@ void car_Backword_30()
 
 
 /*****************************************************************************************************************************
-			This function is used to set the car to 0 and display this on the LCD.
+			This function is used to set the car speed to 0 and display this on the LCD.
 /*****************************************************************************************************************************/
 void Car_Stopping()
 {
