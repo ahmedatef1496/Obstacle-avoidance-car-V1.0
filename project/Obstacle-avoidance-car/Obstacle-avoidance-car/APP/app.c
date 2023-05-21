@@ -6,6 +6,11 @@
  */ 
 #include "app.h"
 
+
+/*****************************************************************************************************************************
+*							Global Variables						     *
+*****************************************************************************************************************************/
+
 volatile u16 g_distance;
 u8 g_start_Flag=1, lcdFlag = 0, lcdFlag2 = 0;
 static u8 g_keyPressed = 0;								//Used to store the value of the key pressed 
@@ -14,6 +19,9 @@ static u32 ovf =0;
 static u8 g_Rotate_Counter;
 
 
+/***********************************************************************************************************************************************
+		This function is used to check if the STOP button is pressed or not and display this on the LCD.
+/***********************************************************************************************************************************************/
 void STOP_check (void)
 {
 	KEYPAD_getpressedkey(&g_keyPressed);
@@ -29,6 +37,10 @@ void STOP_check (void)
 	}
 }
 
+
+/***********************************************************************************************************************************************
+This function is used to set the direction of the car to forward and set the speed of it to 30% of the max speed and display this on the LCD.
+/***********************************************************************************************************************************************/
 void car_Forward_30()
 {	
 	PWM_set_duty(30,100);
@@ -41,6 +53,10 @@ void car_Forward_30()
 	LCD_WriteString(" Cm");
 }
 
+
+/***********************************************************************************************************************************************
+This function is used to set the direction of the car to forward and set the speed of it to 50% of the max speed and display this on the LCD.
+/***********************************************************************************************************************************************/
 void car_Forward_50()
 {
 	PWM_set_duty(50,100);
@@ -53,6 +69,10 @@ void car_Forward_50()
 	LCD_WriteString(" Cm");
 }
 
+
+/***********************************************************************************************************************************************
+This function is used to set the direction of the car to be rotating and set the speed of it to 30% of the max speed and display this on the LCD.
+/***********************************************************************************************************************************************/
 void car_Rotating()
 {	
 	while (car_mode == 0 && (g_distance <= 30 && g_distance > 20))
@@ -78,6 +98,10 @@ void car_Rotating()
 	}
 }
 
+
+/***********************************************************************************************************************************************
+This function is used to set the direction of the car to backward and set the speed of it to 30% of the max speed and display this on the LCD.
+/***********************************************************************************************************************************************/
 void car_Backword_30()
 {
 	while (g_distance <= 20)
@@ -96,6 +120,10 @@ void car_Backword_30()
 	
 }
 
+
+/*****************************************************************************************************************************
+			This function is used to set the car to 0 and display this on the LCD.
+/*****************************************************************************************************************************/
 void Car_Stopping()
 {
 	PWM_set_duty(0,100);
@@ -108,6 +136,10 @@ void Car_Stopping()
 	LCD_WriteString(" Cm");
 }
 
+
+/*****************************************************************************************************************************
+		This function is used to set the timers functionalities needed within the application.
+/*****************************************************************************************************************************/
 void Speed_50_check()
 {
 	if(g_speed_flag == 1)
@@ -128,6 +160,31 @@ void Speed_50_check()
 	}
 }
 
+
+					/********************************************/
+/*****************************************************************************************************************************
+			This function is used to initialize our peripherals used in the application.
+/*****************************************************************************************************************************/
+void app_init()
+{
+	LCD_PinsInit();
+	LCD_Init();
+	GLOBALE_ENABLE();
+	pwm_init();
+	Car_Motors_init();
+	LCD_Init();
+	KEYPAD_init();
+	DIO_initpin(PIND6,INPULL);
+	DIO_Init_All();
+	US_init();
+	TIMER_2_INT();
+	TIMER2_OV_SetCallBack(Speed_50_check);
+}
+
+
+/***********************************************************************************************************************************************
+	This function is the first stage in the mainflow of our program, it contains the welcome messege and the direction set option.
+/***********************************************************************************************************************************************/
 void startStage(void) 
 {	
 	Button_State buttonState = 0;
@@ -188,23 +245,9 @@ void startStage(void)
 }
 
 
-
-void app_init()
-{
-	LCD_PinsInit();
-	LCD_Init();
-	GLOBALE_ENABLE();
-	pwm_init();
-	Car_Motors_init();
-	LCD_Init();
-	KEYPAD_init();
-	DIO_initpin(PIND6,INPULL);
-	DIO_Init_All();
-	US_init();
-	TIMER_2_INT();
-	TIMER2_OV_SetCallBack(Speed_50_check);
-}
-
+/***********************************************************************************************************************************************
+This function is an infinite loop used for the project sequence logic and achieving the functionalities requried according to distance readings.
+/***********************************************************************************************************************************************/
 void app_start()
 {
 	
